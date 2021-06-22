@@ -10,7 +10,15 @@ Office Hours: cs61a.org/office-hours/
 Mon/Tues/Thurs/Fri 12:30pm-2:00pm
 ```
 
-## Lecture 1, 06/22/21: Expressions
+- [CS61A: Structure & Interpretation of Computer Programs](#cs61a-structure--interpretation-of-computer-programs)
+  - [**Lecture 1, 06/22/21: Expressions**](#lecture-1-062221-expressions)
+  - [**Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data**](#lecture-2-062221-functions-values-objects-interpreters--data)
+    - [*Key concepts for review:* environment diagrams, functions](#key-concepts-for-review-environment-diagrams-functions)
+  - [**Lecture 3, 06/23/21: TBD**](#lecture-3-062321-tbd)
+    - [*Key concepts for review:* TBD](#key-concepts-for-review-tbd)
+
+
+## **Lecture 1, 06/22/21: Expressions**
 
 ---
 
@@ -29,7 +37,7 @@ add(2, 3)  # add is operator, 2, 3 are operands; operators and operands are expr
 2) Evluate the operands from left to right
 3) Apply the operator (a function) to the evaluated operands (arguments)
 
-## Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data
+## **Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data**
 
 ### *Key concepts for review:* environment diagrams, functions
 
@@ -78,3 +86,8 @@ We don't enter inside the function until we call the function.
 
 **Environment:** sequence of frames; so far, we've seen the global frame and a function's local frame
 
+## **Lecture 3, 06/23/21: TBD**
+
+### *Key concepts for review:* TBD
+
+---
