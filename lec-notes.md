@@ -24,11 +24,10 @@
     - [Defining Functions](#defining-functions)
     - [Calling User-Defined Functions](#calling-user-defined-functions)
     - [Environments](#environments)
-  - [Lecture 3, 06/23/21: TBD](#lecture-3-062321-tbd)
-    - [Control Statements](#control-statements)
-    - [Short Circuiting](#short-circuiting)
-    - [Interesting While Loop Example](#interesting-while-loop-example)
-    - [Subheader 3](#subheader-3)
+  - [Lecture 3, 06/23/21: Lab 01 Notes +](#lecture-3-062321-lab-01-notes-)
+    - [Control Statements (Lab 01)](#control-statements-lab-01)
+    - [Short Circuiting (Lab 01)](#short-circuiting-lab-01)
+    - [Return Values](#return-values)
     - [Subheader 4](#subheader-4)
 
 
@@ -141,9 +140,9 @@ def <name>(<parameters>):  # function signature
 ### Environments
 A sequence of frames; so far, we've seen the global frame and a function's local frame
 
-## Lecture 3, 06/23/21: TBD
+## Lecture 3, 06/23/21: Lab 01 Notes + 
 
-### Control Statements
+### Control Statements (Lab 01)
 
 Control statements control the flow of a program's execution based on the results of logical comparisons; statements have no value
 - Expressions -> evaluated
@@ -156,7 +155,7 @@ Python's three boolean operators, `and`, `or`, and `not`, have an order of opera
 
 Python's boolean operators work on more than booleans (`True`, `False`): `0`, `None`, `''`, and `[]` are all considered false values; all other values are considered true.
 
-### Short Circuiting
+### Short Circuiting (Lab 01)
 
 Short-circuiting occurs when the operator arrives an an operand that allows the operator to make a conclusion about the expression. If `and` or `or` do not short-circuit, they return the last thing they evaluate.
 
@@ -177,8 +176,6 @@ Cases:
      - The value is `True` if the result evaluates to `False`
      - The value is `False` if the result evaluates to `True`
 
-
-
 Examples:
 ```py
 >>> True and 1 / 5
@@ -195,22 +192,9 @@ True
 True
 ```
 
+### Return Values
 
-### Interesting While Loop Example
-
-In the example below, the interpreter exits the function when the condition being evaluated by the while loop is false-y. All non-zero values are truth-y in python, but `0` is false-y, hence why the while loop breaks.
-
-``` py
->>> positive = -9
->>> negative = -12
->>> while negative: # If this loops forever, just type Infinite Loop
-...    if positive:
-...        print(negative)
-...    positive += 3
-...    negative += 3
-```
-
-
-### Subheader 3
+When a function or expression doesn't return anything, it implicitly returns none:
+- `print(print(2))` evaluates `print(2)`, which prints `2` and returns `None`, and then evaluates `print(None)` and prints `None` 
 
 ### Subheader 4
