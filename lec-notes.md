@@ -8,10 +8,10 @@
     Author: Will Tholke
 
 ## Table of Contents
-- [CS61A: Structure & Interpretation of Computer Programs](#cs61a-structure--interpretation-of-computer-programs)
+- [CS 61A: Structure & Interpretation of Computer Programs](#cs-61a-structure--interpretation-of-computer-programs)
   - [Table of Contents](#table-of-contents)
   - [Lecture 1, 06/22/21: Expressions](#lecture-1-062221-expressions)
-    - [Expressions](#expressions)
+    - [Expressions & Statements](#expressions--statements)
     - [Evaluation procedure for call expressions](#evaluation-procedure-for-call-expressions)
   - [Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data](#lecture-2-062221-functions-values-objects-interpreters--data)
     - [Types of Expressions](#types-of-expressions)
@@ -31,11 +31,13 @@
 
 ## Lecture 1, 06/22/21: Expressions
 
-### Expressions
+### Expressions & Statements
 
-Describes computation and evalutes to values; ex: expression is `1 + 2`, value is `3`; all expressions can be written in **f(x)** form; all values are expressions, but not all expressions are values:
+An `expression` is a peice of code that describes computation and evaluates to some value while a *statement* is one or more lines of code that make something happen in a program; ex: expression is `1 + 2`, value is `3`
 
-Example:
+- all expressions can be written in **f(x)** form; all values are expressions, but not all expressions are values
+
+*Example:*
 ```py
 from operator import add, mul
 add(1, 2)  
@@ -45,15 +47,25 @@ add(2, 3)  # add is operator, 2, 3 are operands; operators and operands are expr
 
 ### Evaluation procedure for call expressions
 
-1) evaluate the oeprator
-2) Evluate the operands from left to right
+1) Evaluate the `operator`
+2) Evluate the `operands` from left to right
 3) Apply the operator (a function) to the evaluated operands (arguments)
 
 ## Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data
 
 ### Types of Expressions
 
-Primitive expressions (2, 'hello'), call expressions (add(2, 3)); the operands `2` and `3` can be call expressions
+- Primitive expressions
+  - Only take one step to evaluate
+  - Include numbers and booleans, which evalutate to themselves
+
+- Arithmetic expressions
+  - Numbers can be combined with mathematical operators to form compound expressions
+  - Operators: `+`, `-`, `*`, `**`, etc.
+  - Floating point division `/`: divides the first number by the second and evaluates it to a *float*, a number with a decimal point
+  - Floor division `//`: divides the first number by the second, then rounds down
+  - Modulo `%`: evaluates to the positive remainder left over from division
+    - Arithmetic expressions are evaluated in `PEMDAS` order
 
 ### Values
 
