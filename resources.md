@@ -15,7 +15,6 @@
     - [Midterm/Final Exam Prep](#midtermfinal-exam-prep)
     - [Tutoring](#tutoring)
     - [Notes](#notes)
-    - [Projects](#projects)
     - [Previous Years' Lectures](#previous-years-lectures)
 
 ## Resources
@@ -44,10 +43,6 @@
 ### Notes
 
 - [Albert Wu's Notes](http://albertwu.org/cs61a/)
-
-### Projects
-
-- [Tim K. Chan's Projects](https://eecs.timkchan.com/)
 
 ### Previous Years' Lectures
 
