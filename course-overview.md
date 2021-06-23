@@ -1,20 +1,26 @@
-CS61A: Structure & Interpretation of Computer Programs
-=====
+# CS 61A: Structure & Interpretation of Computer Programs
 
-```md
-University of California, Berkeley
-Summer Session X
-Albert Xu, Alex Kassil, Catherine Cang
-Emails: albertxu3@berkeley.edu, alexkassil@berkeley.edu, catherinecang@berkeley.edu
-Office Hours: cs61a.org/office-hours/
-Mon/Tues/Thurs/Fri 12:30pm-2:00pm
-```
+    University of California, Berkeley
+    Instructors: Albert Xu, Alex Kassil, Catherine Cang
+    Emails: albertxu3@berkeley.edu, alexkassil@berkeley.edu,  catherinecang@berkeley.edu
+    Office Hours: cs61a.org/office-hours/
+    Lecture: Mon/Tues/Thurs/Fri 12:30pm-2:00pm
+    Author: Will Tholke
+
+## Table of Contents
+- [CS 61A: Structure & Interpretation of Computer Programs](#cs-61a-structure--interpretation-of-computer-programs)
+  - [Table of Contents](#table-of-contents)
+  - [Course Overview](#course-overview)
+    - [Announcements, 06/22/21](#announcements-062221)
+    - [Course Format](#course-format)
+    - [Grading](#grading)
+    - [What is Computer Science?](#what-is-computer-science)
+    - [What is CS 61A?](#what-is-cs-61a)
+    - [Alternatives to CS 61A](#alternatives-to-cs-61a)
 
 ## Course Overview
 
----
-
-### **Announcements**
+### Announcements, 06/22/21
 
 1. Lab 00 released
 2. Vitamin 00 due Thursday, June 24th, 2021
@@ -23,17 +29,7 @@ Mon/Tues/Thurs/Fri 12:30pm-2:00pm
 5. Lab party starts Wednesday, June 23, 2021
 6. Sign-ups for small group tutoring start Tuesday, June 22, 2021
 
-### **Resources**
-
-1. cs61a.org; course hub
-2. edstem.org; like Piazza
-3. okpy.org; submit all coding assignments here
-4. howamidoing.cs61a.org; check grades in convenient online interface
-5. oh.cs61a.org; get help
-6. cs61a.org/office-hours; office hours
-7. tutor.cs61a.org; online python tutor (includes environment diagrams)
-
-### **Course Format**
+### Course Format
 
 - **Course Lecture:** 12:30 - 2:00pm, M-Th on Zoom
 - **Duration**: 8 weeks long
@@ -44,7 +40,7 @@ Mon/Tues/Thurs/Fri 12:30pm-2:00pm
 - **Office Hours:** three formats; OH Queue, great for conceptual help, assignment help, and exam prep; Parties, 1 hour each, 2 types (lab/project), work with students & staff; Intructor, meet with the course instructors
 - **Small Group Tutoring Sections (optional):** optional, recurring small-group sections (5-8 students) centered around a worksheet, meet Wed/Fri regularly, you must attend if you sign up
 
-### **Grading**
+### Grading
 
 Not curved; grade is based on how many points you earn over the course of the semester; graded on 300 point scale;
 
@@ -58,20 +54,16 @@ Not curved; grade is based on how many points you earn over the course of the se
 - 55: midterm (Thursday July 15, 5-7 PM)
 - 80: final (Thursday, August 12, 5-8 PM)
 
-## Other Relevant Notes
-
----
-
-### **What is Computer Science?**
+### What is Computer Science?
 
 **Computer science** is the overarching term that describes the mechanism through which we approach problem-solving using computers. Effective solutions might consist of techniques involving *systems, artificial intelligence, graphics, security, networking, programming languages, or theory*.
 
-### **What is CS 61A?**
+### What is CS 61A?
 
 - Managing complexity with **abstraction**
 - Introduction to programming: full understanding of Python fundamentals, combining ideas in large projects, how computers interpret programming languages
 
-### **Alternatives to CS 61A**
+### Alternatives to CS 61A
 
 **CS10: The Beauty and Joy of Computing** – an introduction to fundamentals (& Python) that sets students up for success in CS 61A
 
