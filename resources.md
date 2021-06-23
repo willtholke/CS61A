@@ -22,6 +22,7 @@
 ### General
 
 - [Course Hub](cs61a.org)
+- [okpy Command Generator](https://ok-help.cs61a.org/)
 - [EdStem (like Piazza)](cs61a.org)
 - [OkPy (for submitting assignments)](okpy.org)
 - [CS 61A Status Check](howamidoing.cs61a.org)
