@@ -1,4 +1,8 @@
+# Private course materials
 /projects
+/tutoring
 /lab
+/hw
 
-.DS_Store.DS_Store
+# Other
+.DS_Store
