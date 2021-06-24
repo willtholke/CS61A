@@ -30,7 +30,7 @@
     - [Environments](#environments-1)
     - [Demo](#demo)
     - [Compound Statements](#compound-statements)
-    - [Eval](#eval)
+  - [Lecture 4, 06/24/21: .](#lecture-4-062421-)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -193,10 +193,7 @@ Example:
 - A suite is a sequence of statements
 - To "execute" a suite means to execute its sequence of statements, in order
 
-### Eval
+Use `%` and `//` when we iterating through a bigger number
 
-1) Operator
-2) Operands
-3) Apply operator/operands
+## Lecture 4, 06/24/21: .
 
-Use `%` and `//` when we we're iterating through a bigger number
