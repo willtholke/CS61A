@@ -51,3 +51,9 @@ def is_leap_year(year):
 ```py
 N/A
 ```
+
+## Session 2, 06/24/21
+
+### Subhd 1
+
+### Subhd 2

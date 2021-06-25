@@ -30,16 +30,25 @@
     - [Environments](#environments-1)
     - [Demo](#demo)
     - [Compound Statements](#compound-statements)
-  - [Lecture 4, 06/24/21: .](#lecture-4-062421-)
+  - [Lecture 4, 06/24/21: Higher Order Functions](#lecture-4-062421-higher-order-functions)
+    - [The Fibonacci Sequence: Fall 2016 Lecture 4 Video 2](#the-fibonacci-sequence-fall-2016-lecture-4-video-2)
+    - [Characteristics of Functions: Fall 2013 Lecture 4 Video 4](#characteristics-of-functions-fall-2013-lecture-4-video-4)
+    - [Higher Order Functions: Fall 2013 Lecture 4 Video 4](#higher-order-functions-fall-2013-lecture-4-video-4)
+    - [A Function That Returns a Function: Fall 2013 Lecture 4 Video 5](#a-function-that-returns-a-function-fall-2013-lecture-4-video-5)
+    - [Lambda Expressions Fall 2014 Lecture 5 Video 2](#lambda-expressions-fall-2014-lecture-5-video-2)
+    - [Environment Diagrams](#environment-diagrams-1)
 
 
 ## Lecture 1, 06/22/21: Expressions
 
 ### Expressions & Statements
-
+  
 An expression is a peice of code that describes computation and evaluates to some value while a *statement* is one or more lines of code that make something happen in a program; ex: expression is `1 + 2`, value is `3`
 
-- all expressions can be written in **f(x)** form; all values are expressions, but not all expressions are values
+- Expressions are evaluated
+- Statements are executed
+
+- all expressions can be written in **f(x)** form; all values are expressions, but not all expressions are values; an expression can also be a function
 
 ### Operand vs. Operator
 An **operand** are the values that an operator acts on whereas **operators** are special symbols that indicate that a computation should be performed
@@ -195,5 +204,80 @@ Example:
 
 Use `%` and `//` when we iterating through a bigger number
 
-## Lecture 4, 06/24/21: .
+## Lecture 4, 06/24/21: Higher Order Functions
 
+### The Fibonacci Sequence: [Fall 2016 Lecture 4 Video 2](https://www.youtube.com/watch?v=pveIuZT0GJE&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=1&ab_channel=JohnDeNero)
+
+Every element after 0 and 1 are the sum of the previous two elements: `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...`; the position of each number in the sequence is associated with its index, starting at 0
+
+```py
+def fib(n)
+  """ Compute the nth Fibonacci number, starting with curr 0. """
+  pred, curr = 1, 0
+  k = 0
+  while k < n:
+    pred, curr = curr, pred + curr
+    k = k + 1
+  return curr
+```
+
+### Characteristics of Functions: [Fall 2013 Lecture 4 Video 4](https://www.youtube.com/watch?v=FzbVzGnVBB4&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=3&ab_channel=JohnDeNero)
+
+- Domain - set of all inputs a function can take as arguments
+- Range - set of output values it might return
+- Pure function's behavior is the relationship it creates between input and output
+
+Example:
+```py
+def square(x):  # domain - x is a real number
+  """ Return X * X """
+  return x * x # range: returns a non-negative real number
+# behavior: return value is the square of the input
+  ```
+
+- Each function should have exactly one job but apply to many related situations
+
+### Higher Order Functions: [Fall 2013 Lecture 4 Video 4](https://www.youtube.com/watch?v=UlXvz-34Me0&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=3&ab_channel=JohnDeNero)
+
+
+A higher order function is a function that takes in another function as an argument **and/or** returns another function
+- they allow us to design functions by expressing general patterns of computation, remove repetition from programs, and separate concerns among functions (each function has one job)
+
+
+### A Function That Returns a Function: [Fall 2013 Lecture 4 Video 5](https://www.youtube.com/watch?v=Q9ztlG4ezVs&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=4&ab_channel=JohnDeNero)
+
+
+```py
+def make_adder(n):
+  """ Return a function that takes one argument K and return K + N.
+
+  >>> add_three = make_adder(3)
+  >>> add_three(4)
+  7
+  """
+  def adder(k):
+    return k + n
+  return adder
+  ```
+  
+  - `make_adder()` is a function that returns a function
+  - The name `add_three` is bound to `make_adder()`
+  - `adder()` is a local function
+
+### Lambda Expressions [Fall 2014 Lecture 5 Video 2](https://www.youtube.com/watch?v=vCeNq_P3akI&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=5&ab_channel=JohnDeNero)
+
+Lambda expressions are expressions that evaluate to functions:
+- `lambda <formal parameter>: <return expression>`
+- In environment diagrams, lambda
+- Only the def statement gives the funciton an intrinsic name, which shows up in environment diagrams; in environment diagrams, lambda shows up as $\lambda$ `<line #>`
+
+```py
+>>> x = 10
+>>> square = x * x
+>>> square = lambda x: x & x
+```
+
+### Environment Diagrams
+
+- When a local frame returns something, it closes
+- Show the state of the code when it's finished running
