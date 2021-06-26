@@ -54,6 +54,24 @@ N/A
 
 ## Session 2, 06/24/21
 
-### Subhd 1
+### How to Approach Problems
+
+- Understand a function's intended behavior through the doctest
+- e
+  
+```py
+def pow_of_two(n):
+  """
+  >>> pow_of_two(6)
+  1
+  2
+  4
+  """
+
+print the positive, integer powers ot two less than or equal to n
+
+
+return None
+
 
 ### Subhd 2
