@@ -12,7 +12,7 @@
     links.cs61a.org/laryn
     links.cs61a.org/laryn-feedback
 
-## Session 1, 06/23/21
+## Tutorial Session 1, 06/23/21
 
 ### Evaluation order
 
@@ -52,26 +52,4 @@ def is_leap_year(year):
 N/A
 ```
 
-## Session 2, 06/24/21
-
-### How to Approach Problems
-
-- Understand a function's intended behavior through the doctest
-- e
-  
-```py
-def pow_of_two(n):
-  """
-  >>> pow_of_two(6)
-  1
-  2
-  4
-  """
-
-print the positive, integer powers ot two less than or equal to n
-
-
-return None
-
-
-### Subhd 2
+## Tutorial Session 3, 06/30/21
