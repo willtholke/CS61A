@@ -31,12 +31,29 @@
     - [Demo](#demo)
     - [Compound Statements](#compound-statements)
   - [Lecture 4, 06/24/21: Higher Order Functions](#lecture-4-062421-higher-order-functions)
-    - [The Fibonacci Sequence: Fall 2016 Lecture 4 Video 2](#the-fibonacci-sequence-fall-2016-lecture-4-video-2)
-    - [Characteristics of Functions: Fall 2013 Lecture 4 Video 4](#characteristics-of-functions-fall-2013-lecture-4-video-4)
-    - [Higher Order Functions: Fall 2013 Lecture 4 Video 4](#higher-order-functions-fall-2013-lecture-4-video-4)
-    - [A Function That Returns a Function: Fall 2013 Lecture 4 Video 5](#a-function-that-returns-a-function-fall-2013-lecture-4-video-5)
-    - [Lambda Expressions Fall 2014 Lecture 5 Video 2](#lambda-expressions-fall-2014-lecture-5-video-2)
+    - [The Fibonacci Sequence](#the-fibonacci-sequence)
+    - [Characteristics of Functions](#characteristics-of-functions)
+    - [Higher Order Functions](#higher-order-functions)
+    - [A Function That Returns a Function](#a-function-that-returns-a-function)
+    - [Lambda Expressions](#lambda-expressions)
     - [Environment Diagrams](#environment-diagrams-1)
+  - [Lecture 5, 06/28/21: Environments](#lecture-5-062821-environments)
+    - [Environment Diagrams for Higher Order Functions](#environment-diagrams-for-higher-order-functions)
+    - [Environments for Nested Definitions](#environments-for-nested-definitions)
+    - [Simplified Guide to Draw an Environment Diagram](#simplified-guide-to-draw-an-environment-diagram)
+  - [Lecture 6, 06/29/21: Recursion](#lecture-6-062921-recursion)
+    - [Subheader 1](#subheader-1)
+    - [Subheader 2](#subheader-2)
+    - [Subheader 3](#subheader-3)
+  - [Lecture 7, 06/29/21: Tree Recursion](#lecture-7-062921-tree-recursion)
+    - [Subheader 1](#subheader-1-1)
+    - [Subheader 2](#subheader-2-1)
+    - [Subheader 3](#subheader-3-1)
+  - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
+    - [Reminder, Diagnostic test is tomorrow: Friday, July 2nd](#reminder-diagnostic-test-is-tomorrow-friday-july-2nd)
+    - [Subheader 1](#subheader-1-2)
+    - [Subheader 2](#subheader-2-2)
+    - [Subheader 3](#subheader-3-2)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -146,7 +163,7 @@ def <name>(<parameters>):  # function signature
 2) Bind the function's parameters to its arguments in that frame
 3) Execute the body of the function in the new argument
 
-<img src="images/environment-diagram.png" alt="drawing" width="300"/>
+<img src="images/../../images/environment-diagram.png" alt="drawing" width="300"/>
 
 ### Environments
 A sequence of frames; so far, we've seen the global frame and a function's local frame
@@ -206,7 +223,9 @@ Use `%` and `//` when we iterating through a bigger number
 
 ## Lecture 4, 06/24/21: Higher Order Functions
 
-### The Fibonacci Sequence: [Fall 2016 Lecture 4 Video 2](https://www.youtube.com/watch?v=pveIuZT0GJE&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=1&ab_channel=JohnDeNero)
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L)
+
+### The Fibonacci Sequence
 
 Every element after 0 and 1 are the sum of the previous two elements: `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...`; the position of each number in the sequence is associated with its index, starting at 0
 
@@ -221,7 +240,7 @@ def fib(n)
   return curr
 ```
 
-### Characteristics of Functions: [Fall 2013 Lecture 4 Video 4](https://www.youtube.com/watch?v=FzbVzGnVBB4&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=3&ab_channel=JohnDeNero)
+### Characteristics of Functions
 
 - Domain - set of all inputs a function can take as arguments
 - Range - set of output values it might return
@@ -237,15 +256,13 @@ def square(x):  # domain - x is a real number
 
 - Each function should have exactly one job but apply to many related situations
 
-### Higher Order Functions: [Fall 2013 Lecture 4 Video 4](https://www.youtube.com/watch?v=UlXvz-34Me0&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=3&ab_channel=JohnDeNero)
-
+### Higher Order Functions
 
 A higher order function is a function that takes in another function as an argument **and/or** returns another function
 - they allow us to design functions by expressing general patterns of computation, remove repetition from programs, and separate concerns among functions (each function has one job)
 
 
-### A Function That Returns a Function: [Fall 2013 Lecture 4 Video 5](https://www.youtube.com/watch?v=Q9ztlG4ezVs&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=4&ab_channel=JohnDeNero)
-
+### A Function That Returns a Function
 
 ```py
 def make_adder(n):
@@ -264,7 +281,7 @@ def make_adder(n):
   - The name `add_three` is bound to `make_adder()`
   - `adder()` is a local function
 
-### Lambda Expressions [Fall 2014 Lecture 5 Video 2](https://www.youtube.com/watch?v=vCeNq_P3akI&list=PLx38hZJ5RLZeBqIUj6ud1Ly-41dpqKX-L&index=5&ab_channel=JohnDeNero)
+### Lambda Expressions
 
 Lambda expressions are expressions that evaluate to functions:
 - `lambda <formal parameter>: <return expression>`
@@ -281,3 +298,60 @@ Lambda expressions are expressions that evaluate to functions:
 
 - When a local frame returns something, it closes
 - Show the state of the code when it's finished running
+
+## Lecture 5, 06/28/21: Environments
+
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZfbk5-asJKDq8p655M3EIXD)
+
+### Environment Diagrams for Higher Order Functions
+
+When you apply a user-defined function, you create a new frame and bind the formal parameters to arguments
+
+### Environments for Nested Definitions
+
+- **Every** used-defined function has a parent frame (often global)
+- **Every** local frame has a parent frame (often global)
+- The parent of a function is the frame within which it was created
+
+### Simplified Guide to Draw an Environment Diagram
+
+1. **When a function is defined:**
+   -  Create a function value: `func <name>(<formal parameters>) [parent=<parent>]`
+   - Note that the **parent** is the **current frame**
+   - Bind `<name>` to the function value in the current frame
+2. **When a function is called:**
+   - Add a local frame, titled with the `<name>` of the function being called
+   - Copy the parent of the function to the local frame: `[parent=<label>`]
+   - Bind the `<formal parameters>` to the arguments in the local frame
+   - Execute the body of the function in the environment that starts with the local frame
+3. **If we need to look up names in the environment:**
+   - Follow the parent of the parent of the parent of the frame until we reach the global frame; the value used is wherever the name is found first
+
+
+## Lecture 6, 06/29/21: Recursion
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 7, 06/29/21: Tree Recursion
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 8, 06/29/21: Functional Decomposition + Debugging
+
+### Reminder, Diagnostic test is tomorrow: Friday, July 2nd
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
