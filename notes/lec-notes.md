@@ -20,7 +20,7 @@
     - [Values](#values)
     - [Names](#names)
     - [Discussion Question 1](#discussion-question-1)
-    - [Environment Diagrams](#environment-diagrams)
+    - [Environment Diagrams Preview (not comprehensive)](#environment-diagrams-preview-not-comprehensive)
     - [Defining Functions](#defining-functions)
     - [Calling User-Defined Functions](#calling-user-defined-functions)
     - [Environments](#environments)
@@ -36,24 +36,32 @@
     - [Higher Order Functions](#higher-order-functions)
     - [A Function That Returns a Function](#a-function-that-returns-a-function)
     - [Lambda Expressions](#lambda-expressions)
-    - [Environment Diagrams](#environment-diagrams-1)
   - [Lecture 5, 06/28/21: Environments](#lecture-5-062821-environments)
     - [Environment Diagrams for Higher Order Functions](#environment-diagrams-for-higher-order-functions)
     - [Environments for Nested Definitions](#environments-for-nested-definitions)
     - [Simplified Guide to Draw an Environment Diagram](#simplified-guide-to-draw-an-environment-diagram)
+    - [Complete Guide to Environment Diagrams](#complete-guide-to-environment-diagrams)
+      - [Assignment Statements](#assignment-statements-1)
+      - [Def Statements](#def-statements)
+      - [Return Statements](#return-statements)
+      - [Primitive Expression](#primitive-expression)
+      - [Call Expression](#call-expression)
+      - [Make a new frame](#make-a-new-frame)
+    - [Currying](#currying)
   - [Lecture 6, 06/29/21: Recursion](#lecture-6-062921-recursion)
+    - [Recursive Functions](#recursive-functions)
+    - [Sum Digits Without a While Loop](#sum-digits-without-a-while-loop)
+    - [The anatomy of a recursive function](#the-anatomy-of-a-recursive-function)
+    - [The Recursive Leap of Faith](#the-recursive-leap-of-faith)
+  - [Lecture 7, 06/29/21: Tree Recursion](#lecture-7-062921-tree-recursion)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
-  - [Lecture 7, 06/29/21: Tree Recursion](#lecture-7-062921-tree-recursion)
+  - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
+    - [Reminder, Diagnostic test is tomorrow: Friday, July 2nd](#reminder-diagnostic-test-is-tomorrow-friday-july-2nd)
     - [Subheader 1](#subheader-1-1)
     - [Subheader 2](#subheader-2-1)
     - [Subheader 3](#subheader-3-1)
-  - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
-    - [Reminder, Diagnostic test is tomorrow: Friday, July 2nd](#reminder-diagnostic-test-is-tomorrow-friday-july-2nd)
-    - [Subheader 1](#subheader-1-2)
-    - [Subheader 2](#subheader-2-2)
-    - [Subheader 3](#subheader-3-2)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -144,7 +152,7 @@ result = max(f(2, g(h(1, 5), 3)), 4)
 print(result)  #  min(max(2, min(max(1, 5), 3)), 4)
 ```
 
-### Environment Diagrams
+### Environment Diagrams Preview (not comprehensive)
 
 - [Online Python Tutor](http://pythontutor.com/composingprograms.html#mode=edit)
 - Names are bound to **values** in an *environment*
@@ -294,11 +302,6 @@ Lambda expressions are expressions that evaluate to functions:
 >>> square = lambda x: x & x
 ```
 
-### Environment Diagrams
-
-- When a local frame returns something, it closes
-- Show the state of the code when it's finished running
-
 ## Lecture 5, 06/28/21: Environments
 
 [Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZfbk5-asJKDq8p655M3EIXD)
@@ -312,6 +315,7 @@ When you apply a user-defined function, you create a new frame and bind the form
 - **Every** used-defined function has a parent frame (often global)
 - **Every** local frame has a parent frame (often global)
 - The parent of a function is the frame within which it was created
+- When a local frame returns something, it closes
 
 ### Simplified Guide to Draw an Environment Diagram
 
@@ -327,15 +331,130 @@ When you apply a user-defined function, you create a new frame and bind the form
 3. **If we need to look up names in the environment:**
    - Follow the parent of the parent of the parent of the frame until we reach the global frame; the value used is wherever the name is found first
 
+### Complete Guide to Environment Diagrams
+
+[Associated Lecture Video](https://www.youtube.com/watch?v=bGD728MVwcc&ab_channel=KevinLin)
+
+#### Assignment Statements
+
+1. Evaluate the expression on the right hand side of the equals sign
+2. Bind the value to the name on the left hand side in the current frame
+
+#### Def Statements
+
+1. Create a binding for the name of the function with its value being the function object
+   - Parent of the function is **the frame in which the function is defined in**
+   - Frames have no duplicate names
+2. Squirrel away (skip) the body of the function and go to the next line on the same indentation level
+
+#### Return Statements
+
+1. Evaluate the expression to the right of the return
+2. Create a little space for the return value, which is the evaluated expression
+   - Not a *binding*
+
+#### Primitive Expression
+
+1. In the current environment (ex. f1, then global in this order) return the value of the name
+   - It could evaluate to something like a number or string
+
+#### Call Expression
+
+1. Evaluate the operator
+2. Evaluate the operands from left to right
+3. Apply the operator  (evaluated as a function) to the operands (evaluated as arguments)
+4. Create a new frame in the environment diagram
+
+#### Make a new frame
+
+1. Create a new space for this frame (this will be provided on the exam)
+2. Fill out the header with information from the function signature
+   - Copy down the intrinsic name of the function
+   - Copy down the parent frame
+   - Copy down the formal parameter names
+3. Bind the arguments to their formal parameters
+
+
+### Currying
+
+**Currying:** the act of transforming a multi-argument function into a single-argument, higher-order function
+
+The famed `make_adder()` function now comes in $\lambda$ form!
+
+```py
+def make_adder(n):
+  return lambda k: n + k
+```
+
+Check out `curry2()`, that turns two argument functions into higher order functions:
+```py
+def curry2(f):
+  """ Define function g(x) that takes 1 arg that defines a func h that takes 1 arg, which returns f called on x and y.
+
+  >>> m = curry2(add)
+  >>> add_three = m(3)
+  >>> add_three(2)
+  5
+  >>> add_three(2018)
+  2021
+  """
+  def g(x):
+    def h(y):
+      return f(x, y)
+    return h
+  return g
+```
+  
+  Alternatively, `curry2()` could be defined in terms of $\lambda$ functions:
+  ```py
+  curry2 = lambda f: lambda x: lambda y: f(x, y)
+
+  m = curry2(add)
+  m(2)(3)  # outputs 5
+  ```
 
 ## Lecture 6, 06/29/21: Recursion
 
-### Subheader 1
+### Recursive Functions
 
-### Subheader 2
+**Defniition:** a function is called recursive if the body of that function calls itself, either directly or indirectly
 
-### Subheader 3
+**Implication:** Executing the body of a recursive function may require evaluating the function
 
+Hide the implementation of a function; all we need to know what the function takes in and returns
+
+### Sum Digits Without a While Loop
+
+```py
+def sum_digits(n):
+  if n < 10:
+    return n
+  else:
+    all_but_liast, last = split(n)
+    return sum_digits(all_but_last) + last
+```
+
+### The anatomy of a recursive function
+
+- The def statement header is similar to other functions
+- Conditional statements check for **base cases**
+- Base cases are evaluated **without recursive calls**
+- Recursive cases are evaluated **with recursive calls**
+- Ex: each call to a function within a function solves a simpler problem than the last (smaller parameter)
+
+### The Recursive Leap of Faith
+
+```py
+def fact(n):
+  if n == 0:
+    return 1
+  else:
+    return n * fact(n - 1)
+```
+
+1. Verify the base case
+2. Treat **fact** as a functional abstraction
+3. Verify that fact(n) is correct
 
 ## Lecture 7, 06/29/21: Tree Recursion
 
