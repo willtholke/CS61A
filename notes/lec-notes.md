@@ -53,15 +53,37 @@
     - [Sum Digits Without a While Loop](#sum-digits-without-a-while-loop)
     - [The anatomy of a recursive function](#the-anatomy-of-a-recursive-function)
     - [The Recursive Leap of Faith](#the-recursive-leap-of-faith)
+    - [Abstraction](#abstraction)
   - [Lecture 7, 06/29/21: Tree Recursion](#lecture-7-062921-tree-recursion)
+    - [Tree Recursion](#tree-recursion)
+    - [Towers of Hanoi](#towers-of-hanoi)
+    - [Counting Partitions](#counting-partitions)
+  - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
+  - [Lecture 9, 07/06/21: Sequences + Data Abstraction](#lecture-9-070621-sequences--data-abstraction)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
-  - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
-    - [Reminder, Diagnostic test is tomorrow: Friday, July 2nd](#reminder-diagnostic-test-is-tomorrow-friday-july-2nd)
+  - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
     - [Subheader 1](#subheader-1-1)
     - [Subheader 2](#subheader-2-1)
     - [Subheader 3](#subheader-3-1)
+  - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
+    - [Subheader 1](#subheader-1-2)
+    - [Subheader 2](#subheader-2-2)
+    - [Subheader 3](#subheader-3-2)
+  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
+    - [Subheader 1](#subheader-1-3)
+    - [Subheader 2](#subheader-2-3)
+    - [Subheader 3](#subheader-3-3)
+  - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
+    - [Subheade 1](#subheade-1)
+    - [Subheader 2](#subheader-2-4)
+    - [Subheader 3](#subheader-3-4)
+  - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
+    - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
+    - [Subheader 1](#subheader-1-4)
+    - [Subheader 2](#subheader-2-5)
+    - [Subheader 3](#subheader-3-5)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -333,7 +355,7 @@ When you apply a user-defined function, you create a new frame and bind the form
 
 ### Complete Guide to Environment Diagrams
 
-[Associated Lecture Video](https://www.youtube.com/watch?v=bGD728MVwcc&ab_channel=KevinLin)
+[Prerecorded Lecture Playlist](https://www.youtube.com/watch?v=bGD728MVwcc&ab_channel=KevinLin)
 
 #### Assignment Statements
 
@@ -444,6 +466,8 @@ def sum_digits(n):
 
 ### The Recursive Leap of Faith
 
+Factorial:
+
 ```py
 def fact(n):
   if n == 0:
@@ -456,21 +480,153 @@ def fact(n):
 2. Treat **fact** as a functional abstraction
 3. Verify that fact(n) is correct
 
+### Abstraction
+
+**Functional abstraction** - giving a name to some computational process, then referring to that process without worrying about the details of its implementation
+
+Naming Conventions for Values:
+
+- `n, k, i` - usually integers
+- `x, y, z` - usually real numbers
+- `f, g, h` - usually functions
+
 ## Lecture 7, 06/29/21: Tree Recursion
 
-### Subheader 1
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZeBe3OhI9jWlpvAUXd_Aie1)
 
-### Subheader 2
+### Tree Recursion
 
-### Subheader 3
+**Tree Recursion** - the tree-shaped processes that arise whenever executing the body of a recursive function makes more than one call to that function
 
+```py
+def fib(n):
+  if n == 0:  # base case 1
+    return 0
+  elif n == 1:  # base case 2
+    return 1
+  else:
+    return fib(n-2) + fib(n-1)  # more than one call to fib() in the body of fib()
+```
+
+```md
+              fib(5)
+              /    \
+             /      \
+            /        \
+           /          \
+        fib(3)         \
+       /    \        fib(4)
+      /      \        /    \
+     /        \     etc.   etc.
+   fib(1)   fib(2)    
+     |        /  \
+     1   fib(2)  fib(1)
+            |       |
+            0       1
+```
+
+### Towers of Hanoi
+
+The Towers of Hanoi problems shows us two things:
+
+1) the power and beautify of recursion
+2) exponential growth
+
+
+```py
+def move_disk(disk_number, from_peg, to_peg):
+  print("Move disk " + str(disk_number) + " from peg " \
+    + str(from_peg) + " to peg " + str(to_peg) + ".") 
+```
+
+```py
+def solve_hanoi(n, start_peg, end_peg):  # (3, 1, 2) 3 disks from peg 1 to peg 2
+  if n == 1:  # base case is 1 disk
+    move_disk(n, start_peg, end_peg)  # print out instruction
+  else:
+    spare_peg = 6 - start_peg - end_peg
+    solve_hanoi(n - 1, start_peg, spare_peg)  # (top, start, spare)
+    move_disk(n, start_peg, end_peg)
+    solve_hanoi(n - 1, spare_peg, end_peg)
+```
+
+### Counting Partitions
+
+Count_partitions(6, 4) - counts the number of ways that 6 can be broken into groups of partitions up to size 4
+
+```py
+def count_partitions(n, m):
+  if n == 0:
+    return 1
+  elif n < 0:
+    return 0
+  elif m == 0:
+    return 0
+  else:
+    with_m = count_partitions(n - m, m)
+    without_m = count_partitions(n, m-1)
+    return with_m + without_m
+```
 
 ## Lecture 8, 06/29/21: Functional Decomposition + Debugging
 
-### Reminder, Diagnostic test is tomorrow: Friday, July 2nd
+[Prerecorded Lecture Playlist](https://www.youtube.com/watch?v=AI7JJK2_e5c&ab_channel=CS61ADepartmental)
+
+
+## Lecture 9, 07/06/21: Sequences + Data Abstraction
+
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZdfTyZcuvzBcJ1raFJtdC-h)
 
 ### Subheader 1
 
 ### Subheader 2
 
 ### Subheader 3
+
+
+## Lecture 10, 07/07/21: Trees
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 11, 07/08/21: Mutable Sequences
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 12, 07/12/21: Complexity
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 13, 07/13/21: Iterators + Generators
+
+### Subheade 1
+
+### Subheader 2
+
+### Subheader 3
+
+
+## Lecture 14, 07/14/21: Midterm Review
+
+### Reminder: Midterm is tomorrow!
+
+### Subheader 1
+
+### Subheader 2
+
+### Subheader 3
+```
