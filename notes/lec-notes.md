@@ -60,30 +60,35 @@
     - [Counting Partitions](#counting-partitions)
   - [Lecture 8, 06/29/21: Functional Decomposition + Debugging](#lecture-8-062921-functional-decomposition--debugging)
   - [Lecture 9, 07/06/21: Sequences + Data Abstraction](#lecture-9-070621-sequences--data-abstraction)
+    - [List basics](#list-basics)
+    - [Containers](#containers)
+    - [For Statements](#for-statements)
+    - [Ranges](#ranges)
+    - [List Comprehensions](#list-comprehensions)
+    - [Strings](#strings)
+    - [Dictionaries](#dictionaries)
+    - [Data Abstraction & Barriers](#data-abstraction--barriers)
+  - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
-  - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
+  - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
     - [Subheader 1](#subheader-1-1)
     - [Subheader 2](#subheader-2-1)
     - [Subheader 3](#subheader-3-1)
-  - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
+  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
     - [Subheader 1](#subheader-1-2)
     - [Subheader 2](#subheader-2-2)
     - [Subheader 3](#subheader-3-2)
-  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
-    - [Subheader 1](#subheader-1-3)
-    - [Subheader 2](#subheader-2-3)
-    - [Subheader 3](#subheader-3-3)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
     - [Subheade 1](#subheade-1)
-    - [Subheader 2](#subheader-2-4)
-    - [Subheader 3](#subheader-3-4)
+    - [Subheader 2](#subheader-2-3)
+    - [Subheader 3](#subheader-3-3)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
-    - [Subheader 1](#subheader-1-4)
-    - [Subheader 2](#subheader-2-5)
-    - [Subheader 3](#subheader-3-5)
+    - [Subheader 1](#subheader-1-3)
+    - [Subheader 2](#subheader-2-4)
+    - [Subheader 3](#subheader-3-4)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -577,12 +582,124 @@ def count_partitions(n, m):
 
 [Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZdfTyZcuvzBcJ1raFJtdC-h)
 
-### Subheader 1
+### List basics
 
-### Subheader 2
+The number of elements
 
-### Subheader 3
+```py
+>>> digits = [1, 8, 2, 8]
+>>> len(digits)
+4
+```
 
+An element selected by its index
+
+```py
+>>> digits = [1, 8, 2, 8]
+>>> digits[3]
+8
+```
+
+Concatenation and repetition
+
+```py
+>>> digits = [1, 8, 2, 8]
+>>> [2, 7] + digits * 2
+[2, 7, 1, 8, 2, 8, 1, 8, 2, 8]
+```
+
+Nested lists
+
+```py
+>>> nested = [[1, 2], [3, 4]]
+>>> nested[0]
+[1, 2]
+>>> nested[1][1]
+[4]
+```
+
+### Containers
+
+`in` is a built-in operator for testing whether an element appears in a compound value and returns `True` or `False`; it doesn't look for subsequences (like `[1, 8] in [1, 8, 2, 8]`) but instead looks for individual elements (like `[1, 8] in [[1, 8], 2, 8]`
+
+### For Statements
+
+The for loop in the function below executes the suite of a statement according to the number of elements in s. 
+
+```py
+def count(s, value):
+  """ Count the number of times that value appears in sequence s.
+  >>> count([1, 2, 1, 2, 1], 1)
+  3
+  """
+  total = 0
+  for element in s:
+    if element == value:
+      total += 1
+  return total
+```
+
+```py
+for <name> in <expression>:
+  <suite>
+```
+
+- `<expression>` needs to evaluate to a sequence
+- `<name>` is given to each element in that sequence
+- For each element in the sequence, bind the name to the element in the current frame and execute the suite
+
+### Ranges
+
+A range is a sequence of consecutive integers
+
+Length: ending value - starting value
+
+Element selection: starting value + index
+
+### List Comprehensions
+
+```py
+>>> letters = ['a', 'b', 'c', 'd', 'o', 'l', 'o']
+>>> [letters[i] for i in [2, 4, 6, 5]]
+['c', 'o', 'o', 'l']
+```
+
+### Strings
+
+Line feed: `\n`, which "escapes" the following character
+
+### Dictionaries
+
+Dictionaries associate values with keys in a key-value pair, but don't establish relationships between key-value pairs; dictionaries are inherently unordered
+
+Dictionaries have two restrictions:
+
+- a key of a dict cannot be a list or a dict (or any mutable type)
+- two keys cannot be identical & there can only be one value for a given key
+
+
+```py
+>>> my_dict = {'name': 'will', 'age': 20}
+>>> my_dict['name']
+'will'
+
+>>> my_dict.get('name', 0)
+'will'
+>>> my_dict.get('fav_color', 'unknown')
+'unknown'
+```
+
+### Data Abstraction & Barriers
+
+**Data Abstraction:** a methodology by which functions enforce an abstraction barrier between *representation* and *use*; an abstract data type lets us manipulate compound objects as units
+
+Example: rational numbers
+
+```md
+3 / 2 * 3 / 5 = 9 / 10
+can be represented as 
+nx / dx * ny / dy = (nx * ny) / (dx * dy)
+```
 
 ## Lecture 10, 07/07/21: Trees
 
