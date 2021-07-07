@@ -68,6 +68,8 @@
     - [Strings](#strings)
     - [Dictionaries](#dictionaries)
     - [Data Abstraction & Barriers](#data-abstraction--barriers)
+    - [List slicing](#list-slicing)
+    - [Min/Max (with Key)](#minmax-with-key)
   - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
@@ -658,6 +660,8 @@ Element selection: starting value + index
 
 ### List Comprehensions
 
+`[<map exp> for <name> in <iter exp> if <filter exp>]`
+
 ```py
 >>> letters = ['a', 'b', 'c', 'd', 'o', 'l', 'o']
 >>> [letters[i] for i in [2, 4, 6, 5]]
@@ -699,6 +703,24 @@ Example: rational numbers
 3 / 2 * 3 / 5 = 9 / 10
 can be represented as 
 nx / dx * ny / dy = (nx * ny) / (dx * dy)
+```
+
+### List slicing
+
+**Slicing** - specify a starting index and an ending index, separated by a colon; Python creates a new list with the elements from the starting index up to (but not including) the ending index
+
+**Step size** - setting step size to 2 means taht the returned list will include very other value from the starting index to ending index; negative step indicates that we are stepping backwards through a list
+
+`lst[:]` creates a copy of `lst`
+`lst[::-1]` creates `lst` but reversed
+
+### Min/Max (with Key)
+
+Which input had an input that validated the key?
+
+```py
+>>> max([1, 2, 3], key=lambda x: -x)
+1
 ```
 
 ## Lecture 10, 07/07/21: Trees
