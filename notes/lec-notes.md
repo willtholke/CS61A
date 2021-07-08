@@ -71,26 +71,31 @@
     - [List slicing](#list-slicing)
     - [Min/Max (with Key)](#minmax-with-key)
   - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
+    - [Trees](#trees)
+    - [Tree Processing](#tree-processing)
+    - [Printing Trees](#printing-trees)
+    - [Sum labels](#sum-labels)
+    - [Constructor and Selectors: Rational Data Abstraction Implemented as Functions](#constructor-and-selectors-rational-data-abstraction-implemented-as-functions)
+    - [Box-and-Pointer in Environment Diagrams](#box-and-pointer-in-environment-diagrams)
+    - [Slicing](#slicing)
+    - [Sequence Aggregation](#sequence-aggregation)
+  - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
-  - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
+  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
     - [Subheader 1](#subheader-1-1)
     - [Subheader 2](#subheader-2-1)
     - [Subheader 3](#subheader-3-1)
-  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
-    - [Subheader 1](#subheader-1-2)
-    - [Subheader 2](#subheader-2-2)
-    - [Subheader 3](#subheader-3-2)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
     - [Subheade 1](#subheade-1)
-    - [Subheader 2](#subheader-2-3)
-    - [Subheader 3](#subheader-3-3)
+    - [Subheader 2](#subheader-2-2)
+    - [Subheader 3](#subheader-3-2)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
-    - [Subheader 1](#subheader-1-3)
-    - [Subheader 2](#subheader-2-4)
-    - [Subheader 3](#subheader-3-4)
+    - [Subheader 1](#subheader-1-2)
+    - [Subheader 2](#subheader-2-3)
+    - [Subheader 3](#subheader-3-3)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -725,12 +730,101 @@ Which input had an input that validated the key?
 
 ## Lecture 10, 07/07/21: Trees
 
-### Subheader 1
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA)
 
-### Subheader 2
+### Trees
 
-### Subheader 3
+- A **tree** has a root **label** and a list of **branches**
+- Each branch is a **tree**
+- A tree with zero branches is called a **leaf** (also a **tree**)
+- Each location in a tree is called a **node**
+- Each **node** has a **label** that acn be any value
+- One node can be the **parent/child** of anoth
 
+### Tree Processing
+
+In practice, we don't really create trees using the constructor and a set of explicit labels. Instead, we generate the tree programmatically: an example for fib_tree is provided in the lecture videos.
+
+### Printing Trees
+
+```py
+def print_tree(t, indent=0):
+  """ Add indentation of each label to see the depth of each tree.
+  >>> print_tree(fib_tree(4))
+  3
+    1
+      0
+      1
+    2
+      1
+      1
+        0
+        1
+  """
+  print('  ' * indent + str(label(t)))
+  for b in branches(t):
+    print_tree(b, indent + 1)
+```
+
+### Sum labels
+
+(Associated Lecture Video)[https://www.youtube.com/watch?v=zSEvi3sF3Z0&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=8&ab_channel=JohnDeNero]
+
+### Constructor and Selectors: Rational Data Abstraction Implemented as Functions
+
+```py
+def rational(n, d):  # constructor is a higher order function
+  """ Construct a rational number x that represents n / d. """
+  def select(name):  # this function represents a rational number
+    if name == 'n':
+      return n
+    elif name == 'd'"
+      return d
+  return select
+
+def numer(x):
+  return x('n')  # selector calls the object itself
+
+def demon(x):
+  return x('d')
+
+>>> x = rational(3, 8)
+>>> numer(x)
+
+```
+
+### Box-and-Pointer in Environment Diagrams
+
+[Associated Lecture Video] (https://www.youtube.com/watch?v=aSqOiUZg7kQ&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=2&ab_channel=JohnDeNero)
+
+### Slicing
+
+```py
+>>> lst = [1, 2, 3, 4]
+>>> new_list = list[:1] # all the way up to but not including index pos 1
+[1]
+```
+
+### Sequence Aggregation
+
+Several built-in functions take iterable arguments and aggregate them into a value
+
+```py
+# sum(iterable[, start]) -> value
+>>> sum([[2, 3], [4]], [])
+[2, 3, 4]
+```
+
+```py
+# max(iterable[, key=func]) --> value
+>>> max(range(10), key=lambda x: 7-(x-4)*(x-2))
+3
+```
+
+```py
+all(iterable) -> bool
+# return True if bool(x) is True for all values x in the iterable or if iterable is empty
+```
 
 ## Lecture 11, 07/08/21: Mutable Sequences
 
