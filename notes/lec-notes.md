@@ -80,22 +80,22 @@
     - [Slicing](#slicing)
     - [Sequence Aggregation](#sequence-aggregation)
   - [Lecture 11, 07/08/21: Mutable Sequences](#lecture-11-070821-mutable-sequences)
+    - [Objects](#objects)
+    - [Wait, why are strings objects?](#wait-why-are-strings-objects)
+    - [Mutation](#mutation)
+  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
     - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
-  - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
-    - [Subheader 1](#subheader-1-1)
-    - [Subheader 2](#subheader-2-1)
-    - [Subheader 3](#subheader-3-1)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
     - [Subheade 1](#subheade-1)
-    - [Subheader 2](#subheader-2-2)
-    - [Subheader 3](#subheader-3-2)
+    - [Subheader 2](#subheader-2-1)
+    - [Subheader 3](#subheader-3-1)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
-    - [Subheader 1](#subheader-1-2)
-    - [Subheader 2](#subheader-2-3)
-    - [Subheader 3](#subheader-3-3)
+    - [Subheader 1](#subheader-1-1)
+    - [Subheader 2](#subheader-2-2)
+    - [Subheader 3](#subheader-3-2)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -828,12 +828,56 @@ all(iterable) -> bool
 
 ## Lecture 11, 07/08/21: Mutable Sequences
 
-### Subheader 1
+### Objects
 
-### Subheader 2
+- In Python, every value is an object (including strings!)
+- An extremely general concept; anything that has attributes can be considered an object
+- Consist of data and behavior bundled together to create abstractions
+- Objects have methods that can be called using dot syntax: `object.method()`
 
-### Subheader 3
+### Wait, why are strings objects?
 
+Strings have attributes! Why does that matter? Well, we can call methods on the string `'Hello'`, as shown below:
+
+```py
+>>> s = 'Hello'
+>>> s.upper()
+'HELLO'
+>>> s.swapcase()
+'hELLO'
+```
+
+### Mutation
+
+```py
+>>> a = [10]
+>>> b = a
+>>> a == b
+True
+>>> a.append(20)
+>>> a == b
+True
+>>> a
+[10, 20]
+>>> b
+[10, 20]
+```
+
+Conversely, ...
+
+```
+>>> a = [10]
+>>> b = [10]
+>>> a == b
+False
+>>> b.append(20)
+>>> b
+[10, 20]
+>>> a
+[10]
+>>> a == b
+False
+```
 
 ## Lecture 12, 07/12/21: Complexity
 
