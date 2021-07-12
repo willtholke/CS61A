@@ -84,18 +84,16 @@
     - [Wait, why are strings objects?](#wait-why-are-strings-objects)
     - [Mutation](#mutation)
   - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
-    - [Subheader 1](#subheader-1)
-    - [Subheader 2](#subheader-2)
-    - [Subheader 3](#subheader-3)
+    - [Orders of Growth](#orders-of-growth)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
     - [Subheade 1](#subheade-1)
-    - [Subheader 2](#subheader-2-1)
-    - [Subheader 3](#subheader-3-1)
+    - [Subheader 2](#subheader-2)
+    - [Subheader 3](#subheader-3)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
-    - [Subheader 1](#subheader-1-1)
-    - [Subheader 2](#subheader-2-2)
-    - [Subheader 3](#subheader-3-2)
+    - [Subheader 1](#subheader-1)
+    - [Subheader 2](#subheader-2-1)
+    - [Subheader 3](#subheader-3-1)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -785,7 +783,7 @@ def rational(n, d):  # constructor is a higher order function
 def numer(x):
   return x('n')  # selector calls the object itself
 
-def demon(x):
+def denom(x):
   return x('d')
 
 >>> x = rational(3, 8)
@@ -881,11 +879,20 @@ False
 
 ## Lecture 12, 07/12/21: Complexity
 
-### Subheader 1
+### Orders of Growth
 
-### Subheader 2
+**Order of Growth** - how long it takes a function to run; the order of growth will change based on *the amount of recursion or iteration within the function's suite*
 
-### Subheader 3
+For example, 
+
+**Constant running time O(1)** is when, regardless of the size of n, the runtime *(how many more times a loop is executed or how many more recursive calls occur as the input increases)* is the same
+
+**Logarithmic running time O(log(n))** is when the runtime grows in proportion to `log(input)`
+
+**Quadratic running time O(n^2)** is when the runtime grows in proportion to `input**2`
+
+**Exponential running time O(c^n)** is when the runtime grows in proportion to something like `constant^input` 
+
 
 
 ## Lecture 13, 07/13/21: Iterators + Generators
