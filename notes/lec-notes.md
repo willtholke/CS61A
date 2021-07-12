@@ -85,6 +85,8 @@
     - [Mutation](#mutation)
   - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
     - [Orders of Growth](#orders-of-growth)
+    - [Memoization](#memoization)
+    - [Space](#space)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
     - [Subheade 1](#subheade-1)
     - [Subheader 2](#subheader-2)
@@ -881,17 +883,101 @@ False
 
 ### Orders of Growth
 
-**Order of Growth** - how long it takes a function to run; the order of growth will change based on *the amount of recursion or iteration within the function's suite*
-
-For example, 
+The order of growth of a function will change based on the amount of recursion or iteration within the function's suite as measured by the change in input `n`
 
 **Constant running time O(1)** is when, regardless of the size of n, the runtime *(how many more times a loop is executed or how many more recursive calls occur as the input increases)* is the same
 
+**Linear running time O(n)** is when the runtime grows in direct proportion to n
+
+*Question:* would the function below have a linear runtime?
+
+```py
+def exp(b, n):
+    if n == 0:
+      return 1
+    else:
+      return b * exp(b, n -1)
+```
+
+*Answer:* the runtime rows in *direct proportion* to input `n`
+
 **Logarithmic running time O(log(n))** is when the runtime grows in proportion to `log(input)`
+
+Doubling the input increases the time by a constant C
 
 **Quadratic running time O(n^2)** is when the runtime grows in proportion to `input**2`
 
+```py
+def overlap(a, b):
+  count = 0
+  for item in a:
+    for other in b:
+      if item == other:
+        count += 1
+  return count
+
+>>> overlap([3, 5, 7, 6], [4, 5, 6, 5])
+3
+```
+
 **Exponential running time O(c^n)** is when the runtime grows in proportion to something like `constant^input` 
+
+Tree recursive functions have an exponential run time, because the runtime grows in proportion to 
+
+| Order       | Time complexity | Example                                |
+|-------------|-----------------|----------------------------------------|
+| Constant    | Θ(1)            | Indexing an item in a list             |
+| Logarithmic | Θ(lg N)         | Repeatedly halving a number            |
+| Linear      | Θ(n)            | Summing a list                         |
+| Quadratic   | Θ(n^2)          | Summing each pair of numbers in a list |
+| Exponential | Θ(2^n)          | Visiting each node in a binary tree    |
+
+
+[Here's](https://cs61a.org/study-guide/orders-of-growth/) a great explanation for each order of growth
+
+### Memoization
+
+**Idea:** keep memos of everything we've seen before inside of a cache
+
+```py
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n - 2) + fib(n - 1)
+
+def count(f):
+    def counted(n):
+        counted.call_count += 1
+        return f(N)
+    counted.call_count = 0
+    return counted
+
+def memo(f):
+    cache = {}
+    def memoized(n):
+        if n not in cache:
+            cache[n] = f(n)
+        return cache[n]
+    return memoize
+
+>> fib = count(fib)
+>>> fib(25)
+75025
+>>> fib.call_count
+242785
+
+# but... in a new terminal:
+>>> fib = memo(new_fib)
+>>> fib(25)
+75025
+>>> fib.call_count
+50
+```
+
+### Space
 
 
 
