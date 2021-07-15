@@ -86,16 +86,12 @@
   - [Lecture 12, 07/12/21: Complexity](#lecture-12-071221-complexity)
     - [Orders of Growth](#orders-of-growth)
     - [Memoization](#memoization)
-    - [Space](#space)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
-    - [Subheade 1](#subheade-1)
+    - [Subheader 1](#subheader-1)
     - [Subheader 2](#subheader-2)
     - [Subheader 3](#subheader-3)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
-    - [Subheader 1](#subheader-1)
-    - [Subheader 2](#subheader-2-1)
-    - [Subheader 3](#subheader-3-1)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -354,7 +350,7 @@ When you apply a user-defined function, you create a new frame and bind the form
 ### Simplified Guide to Draw an Environment Diagram
 
 1. **When a function is defined:**
-   -  Create a function value: `func <name>(<formal parameters>) [parent=<parent>]`
+   - Create a function value: `func <name>(<formal parameters>) [parent=<parent>]`
    - Note that the **parent** is the **current frame**
    - Bind `<name>` to the function value in the current frame
 2. **When a function is called:**
@@ -929,7 +925,7 @@ Tree recursive functions have an exponential run time, because the runtime grows
 | Constant    | Θ(1)            | Indexing an item in a list             |
 | Logarithmic | Θ(lg N)         | Repeatedly halving a number            |
 | Linear      | Θ(n)            | Summing a list                         |
-| Quadratic   | Θ(n^2)          | Summing each pair of numbers in a list |
+| Quadratic   | Θ(n^2)          | Summing each pair of numbers in a list (n to any number that isn't n is quadratic: ex: two for loops) |
 | Exponential | Θ(2^n)          | Visiting each node in a binary tree    |
 
 
@@ -977,13 +973,11 @@ def memo(f):
 50
 ```
 
-### Space
-
-
-
 ## Lecture 13, 07/13/21: Iterators + Generators
 
-### Subheade 1
+*Will be taken July 16th, 2021 (day after midterm 1)*
+
+### Subheader 1
 
 ### Subheader 2
 
@@ -994,9 +988,4 @@ def memo(f):
 
 ### Reminder: Midterm is tomorrow!
 
-### Subheader 1
-
-### Subheader 2
-
-### Subheader 3
-```
+[CS 61A Summer 2021 Lecture 14: Midterm Review (Recorded)](https://www.youtube.com/watch?v=XuJHIeEa9Bo&ab_channel=CS61ADepartmental)
