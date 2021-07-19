@@ -920,13 +920,13 @@ def overlap(a, b):
 
 Tree recursive functions have an exponential run time, because the runtime grows in proportion to 
 
-| Order       | Time complexity | Example                                |
-|-------------|-----------------|----------------------------------------|
-| Constant    | Θ(1)            | Indexing an item in a list             |
-| Logarithmic | Θ(lg N)         | Repeatedly halving a number            |
-| Linear      | Θ(n)            | Summing a list                         |
+| Order       | Time complexity | Example                                                                                               |
+| ----------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| Constant    | Θ(1)            | Indexing an item in a list                                                                            |
+| Logarithmic | Θ(lg N)         | Repeatedly halving a number                                                                           |
+| Linear      | Θ(n)            | Summing a list                                                                                        |
 | Quadratic   | Θ(n^2)          | Summing each pair of numbers in a list (n to any number that isn't n is quadratic: ex: two for loops) |
-| Exponential | Θ(2^n)          | Visiting each node in a binary tree    |
+| Exponential | Θ(2^n)          | Visiting each node in a binary tree                                                                   |
 
 
 [Here's](https://cs61a.org/study-guide/orders-of-growth/) a great explanation for each order of growth
