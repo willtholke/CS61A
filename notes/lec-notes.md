@@ -87,11 +87,23 @@
     - [Orders of Growth](#orders-of-growth)
     - [Memoization](#memoization)
   - [Lecture 13, 07/13/21: Iterators + Generators](#lecture-13-071321-iterators--generators)
-    - [Subheader 1](#subheader-1)
-    - [Subheader 2](#subheader-2)
-    - [Subheader 3](#subheader-3)
+    - [Iterators](#iterators)
+    - [Filtration](#filtration)
+    - [Generators](#generators)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
+  - [Lecture 15, 07/19/21: Objects + Classes](#lecture-15-071921-objects--classes)
+    - [Constructors](#constructors)
+  - [Lecture 16, 07/20/21: Inheritance + Representation](#lecture-16-072021-inheritance--representation)
+    - [TBD](#tbd)
+  - [Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees](#lecture-17-072121-representation-linked-lists-and-mutable-trees)
+    - [String Representations](#string-representations)
+    - [Linked List](#linked-list)
+    - [Linked List Class](#linked-list-class)
+    - [Tree Class](#tree-class)
+  - [Lecture 18, 07/22/21: Special Object Methods](#lecture-18-072221-special-object-methods)
+    - [Subeader 1](#subeader-1)
+    - [Subeader 2](#subeader-2)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -791,7 +803,7 @@ def denom(x):
 
 ### Box-and-Pointer in Environment Diagrams
 
-[Associated Lecture Video] (https://www.youtube.com/watch?v=aSqOiUZg7kQ&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=2&ab_channel=JohnDeNero)
+[Associated Lecture Playlist](https://www.youtube.com/watch?v=aSqOiUZg7kQ&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=2&ab_channel=JohnDeNero)
 
 ### Slicing
 
@@ -975,13 +987,42 @@ def memo(f):
 
 ## Lecture 13, 07/13/21: Iterators + Generators
 
-*Will be taken July 16th, 2021 (day after midterm 1)*
+[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZc3rfKSpNPHj-NLCAONJBgW)
 
-### Subheader 1
+### Iterators
 
-### Subheader 2
+**Iterators** - used as a way to access the elements of various containers
 
-### Subheader 3
+Iterablue value -> passed to iter to produce an iterator -> returned from iter and passed to next
+
+- iter(iterable): return an iterator over the elem of an iterable value
+- next(iterator): return the next element in an iterator
+  - `next(t)` on `t = iter([3, 4, 5])` returns `3` the first time, then `4`, then `5`
+  - requires you to create an iterator over the contents of some container first
+
+**Lazy computation** - only when we ask for the next element is a function applied and a result computed
+
+- wrap a iterator in a list if you'd like to compare it using an equality/inequality
+
+### Filtration
+
+```py
+>>> def double(x):
+...     print(x, '=>', 2*x)
+...     return 2*x
+>>> p = filter(f, map(double, range(3, 7)))
+4 => 8
+5 => 10
+6 => 12
+>>> list(p)
+[10, 12]
+```
+
+### Generators
+
+**Generator Function** - returned from a generator function; is an iterator; **yield**s values instead of r**eturn**ing them and can do so multiple times
+
+**yield from:** yields all values from an iterator or iterable
 
 
 ## Lecture 14, 07/14/21: Midterm Review
@@ -989,3 +1030,133 @@ def memo(f):
 ### Reminder: Midterm is tomorrow!
 
 [CS 61A Summer 2021 Lecture 14: Midterm Review (Recorded)](https://www.youtube.com/watch?v=XuJHIeEa9Bo&ab_channel=CS61ADepartmental)
+
+
+## Lecture 15, 07/19/21: Objects + Classes
+
+[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZdpTgPV5maow50L2sWNuZ-o)
+
+### Constructors
+
+`__init__` is a constructor of a class that defines the **instance attributes** of a class. Any attributes defined outside of the constructor are called **class attributes**
+
+Class attributes are "shared" across all instances of a class because they are attributes of the class, not any instance of that class
+
+
+## Lecture 16, 07/20/21: Inheritance + Representation
+
+### TBD
+
+
+## Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees
+
+### String Representations
+
+In Python, all objects produce two string representations:
+
+- The `str` is legible to humans
+  - The result of calling `str` on the value of an expression is what Python prints using the `print` function
+    ```py
+    >>> from fractions import Fraction
+    >>> half = Fraction(1, 2)
+    >>> half
+    Fraction(1, 2)
+    >>> print(half)
+    1/2
+    >>> repr(half)
+    'Fraction(1, 2)'
+    >>> print(repr(half))
+    Fraction(1, 2)
+    >>> print(str(half))
+    1/2
+    >>> print(half)
+    1/2
+    ```
+- The `repr` is legible to the interpreter
+  - repr(object) -> string
+  - Return the canonical string representation of the object
+    ```py
+    >>> 12e12
+    12000000000.0
+    >>> print(repr(12e12))
+    12000000000.0
+    >>> repr(min)
+    '<built-in function min>'
+    ```
+  - Useful for `eval(repr(s)) == s`
+    ```py
+    >>> s = 'hello world'
+    >>> repr(s)
+    "'hello world'"
+    >>> eval(repr(s))
+    'hello world'
+    >>> eval(repr(s)) == s
+    True
+
+### Linked List
+
+- Either empty or first value and the rest of the linked list
+
+```
+Link(3, Link(4, Link(5, Link.empty)))
+
+[3, 4, 5]
+Link Instance 1:
+  First -> 3
+  Rest: points to Link Instance 2
+Link Instance 2:
+  First -> 4
+  Rest: points to Link Instance 3
+Link Instance 3:
+  First -> 5
+  Rest: points to Link Instance 4
+Link.empty
+  Empty
+```
+
+### Linked List Class
+
+```py
+class Link:
+  empty = ()  # some zero-length sequence
+
+  def __init__(self, first, rest=empty):
+    assert rest is Link.empty or isinstance(rest, Link)
+    self.first = first
+    self.rest = rest
+```
+
+- `a.first`: get the first element in the linked list
+- `a.rest`: get the rest of the linked list
+- `a.rest.first`: get the second element in the linked list
+- `a.rest.rest.first`: get the first element in the linked list
+- `a.rest.rest.rest.rest.first`: get the first element in the linked list
+- `a.rest.first = 7`: change the second element in linked list to 7
+- `eval(repr(Link(1)))`: get Link(1)
+
+Link recursion solutions usually look like:
+
+```py
+if s == Link.empty:
+  return Link.empty
+else:
+  ...
+```
+
+### Tree Class
+
+```py
+class Tree:
+  def __init__(self, label, branches=[]):
+    self.label = label
+    for branch in branches:
+      assert isinstance(branch, Tree)
+    self.branches = list(branches)
+```
+
+
+## Lecture 18, 07/22/21: Special Object Methods
+
+### Subeader 1
+
+### Subeader 2
