@@ -101,9 +101,11 @@
     - [Linked List](#linked-list)
     - [Linked List Class](#linked-list-class)
     - [Tree Class](#tree-class)
-  - [Lecture 18, 07/22/21: Special Object Methods](#lecture-18-072221-special-object-methods)
-    - [Subeader 1](#subeader-1)
-    - [Subeader 2](#subeader-2)
+  - [Lecture 18, 07/22/21: Exceptions & Special Object Methods](#lecture-18-072221-exceptions--special-object-methods)
+    - [__repr__ methods](#repr-methods)
+    - [Interfaces](#interfaces)
+    - [Names with Special Behavior](#names-with-special-behavior)
+    - [Exceptions](#exceptions)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -1155,8 +1157,42 @@ class Tree:
 ```
 
 
-## Lecture 18, 07/22/21: Special Object Methods
+## Lecture 18, 07/22/21: Exceptions & Special Object Methods
 
-### Subeader 1
+### __repr__ methods
 
-### Subeader 2
+```py
+class Bear:
+  """ A Bear. """
+
+  def __repr__(self):
+    return "Bear()"
+
+oski = Bear()
+print(oski)
+print(str(oski))
+print(repr(oski))
+print(oski.__str__())
+print(oski.__repr__())
+
+# all of the above will print "Bear()"
+```
+
+### Interfaces
+
+**Message passing:** objects interact by looking up attributes on each other
+
+A **shared message** (attribute name) that elicits similar behavior from different object classes is a method of abstraction
+
+### Names with Special Behavior
+
+Some names are special because they have built-in behavior; they always start and end with two underscores:
+
+Check out the [intense guide to magic methods](https://rszalski.github.io/magicmethods/)! *Courtesy of Albert Xu*
+
+### Exceptions
+
+- Exceptions are *raised*
+  - `raise <expression>`
+- Exceptions can be *handled* with try/except
+- Unhandled exceptions will cause Python to halt execution and print a *stack trace* which we analyzed in depth during Lecture 8 on debugging
