@@ -95,7 +95,6 @@
   - [Lecture 15, 07/19/21: Objects + Classes](#lecture-15-071921-objects--classes)
     - [Constructors](#constructors)
   - [Lecture 16, 07/20/21: Inheritance + Representation](#lecture-16-072021-inheritance--representation)
-    - [TBD](#tbd)
   - [Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees](#lecture-17-072121-representation-linked-lists-and-mutable-trees)
     - [String Representations](#string-representations)
     - [Linked List](#linked-list)
@@ -106,6 +105,15 @@
     - [Interfaces](#interfaces)
     - [Names with Special Behavior](#names-with-special-behavior)
     - [Exceptions](#exceptions)
+  - [Lecture 19, 07/26/21: Scheme](#lecture-19-072621-scheme)
+    - [Fundamentals](#fundamentals)
+    - [Special Form](#special-form)
+    - [Lambda Expressions](#lambda-expressions-1)
+    - [Lists](#lists)
+    - [Quotation](#quotation)
+  - [Lecture 20, 07/27/21: Interpreters](#lecture-20-072721-interpreters)
+  - [Lecture 21, 07/28/21: Macros (optional)](#lecture-21-072821-macros-optional)
+  - [Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme](#lecture-22-072921-exceptions-tail-recursion--more-scheme)
 
 
 ## Lecture 1, 06/22/21: Expressions
@@ -1047,7 +1055,7 @@ Class attributes are "shared" across all instances of a class because they are a
 
 ## Lecture 16, 07/20/21: Inheritance + Representation
 
-### TBD
+No notes available
 
 
 ## Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees
@@ -1196,3 +1204,111 @@ Check out the [intense guide to magic methods](https://rszalski.github.io/magicm
   - `raise <expression>`
 - Exceptions can be *handled* with try/except
 - Unhandled exceptions will cause Python to halt execution and print a *stack trace* which we analyzed in depth during Lecture 8 on debugging
+
+
+## Lecture 19, 07/26/21: Scheme
+
+[Associated lecture playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZf-3ZQQ1eo_BRQlUbHZy4HD)
+
+### Fundamentals
+
+- **Primitive expressions:** 2, 3.3 true, +, quotient, ...
+  - Quotient is floor div
+- **Combinations:** (quotient 10 2), (not true), ...
+  
+Numbers are self-evaluating; symbols are bound to values
+
+Call expressions include an operator and 0 or more operands in parentheses
+
+Interpreter does not care about indentation; combinations can span multiple lines
+
+Same order of evaluation as python
+
+```
+> (quotient 10 2)  # names Scheme's built-in integer division (i.e. function)
+5
+> (quotient (+ 8 7) 5)
+3
+> (+ 1 2 3 4)
+10
+> (* 1 2 3 4)
+24
+> (number? 3)
+#t
+> (number? +)
+#f
+> (zero? 2)
+#f
+> (zero? 0)
+#t
+```
+
+### Special Form
+
+- **Special form:** any combination that is not a call expression
+  - **if expression:** `(if <predicate> <consequent> <alternative>)`
+    - `<consequent>` is like the suite
+  - **and/or:** `(and <e1> ... <en>), (or <e2> ... <en>)`
+  - **Binding symbols:** `(define <symbol> <expression> )`
+
+```
+> (define pi 3.14)  # symbol pi is bound to 3.14 in the global frame
+> (* pi 2)  # 2 is multiplied by pi
+6.28
+```
+
+```
+> (define (abs x)
+    (if (< x 0)
+        (- x)
+        x))
+> (abs -3)
+3
+```
+
+### Lambda Expressions
+
+`(lambda (<formal-parameters>) <body>)`
+
+Two equivalent expressions:
+
+```
+(define (plus4 x) (+ x 4))
+(define plus4 (lambda (x) (x + 4)))
+```
+
+### Lists
+
+All scheme lists have a linked list structure
+
+- **cons:** creates a linked list
+- **car:** return the first element `value`
+- **cdr:** return the rest of a list `(value)`
+- **mil:** the empty list `()`
+
+```
+> (define s (cons 1 (cons 2 nil)))
+(1 2)
+> (car x)
+1
+> (cdr x)
+(2)
+> (list? s)
+#t
+> (list 1 2 3 4)
+(1 2 3 4)
+```
+
+### Quotation
+
+**Quotation** is used to refer to symbols directly in Lisp
+
+
+
+
+## Lecture 20, 07/27/21: Interpreters
+
+
+## Lecture 21, 07/28/21: Macros (optional)
+
+## Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme
