@@ -111,7 +111,10 @@
     - [Lambda Expressions](#lambda-expressions-1)
     - [Lists](#lists)
     - [Quotation](#quotation)
-  - [Lecture 20, 07/27/21: Interpreters](#lecture-20-072721-interpreters)
+    - [Let Expressions](#let-expressions)
+  - [Lecture 20, 07/27/21: Interpreters (Important for Proj04)](#lecture-20-072721-interpreters-important-for-proj04)
+    - [Programming Languages](#programming-languages)
+    - [Parsing](#parsing)
   - [Lecture 21, 07/28/21: Macros (optional)](#lecture-21-072821-macros-optional)
   - [Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme](#lecture-22-072921-exceptions-tail-recursion--more-scheme)
 
@@ -786,7 +789,7 @@ def print_tree(t, indent=0):
 
 ### Sum labels
 
-(Associated Lecture Video)[https://www.youtube.com/watch?v=zSEvi3sF3Z0&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=8&ab_channel=JohnDeNero]
+[Associated Lecture Playlist](https://www.youtube.com/watch?v=zSEvi3sF3Z0&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=8&ab_channel=JohnDeNero)
 
 ### Constructor and Selectors: Rational Data Abstraction Implemented as Functions
 
@@ -1208,7 +1211,7 @@ Check out the [intense guide to magic methods](https://rszalski.github.io/magicm
 
 ## Lecture 19, 07/26/21: Scheme
 
-[Associated lecture playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZf-3ZQQ1eo_BRQlUbHZy4HD)
+[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZf-3ZQQ1eo_BRQlUbHZy4HD)
 
 ### Fundamentals
 
@@ -1270,6 +1273,8 @@ Same order of evaluation as python
 
 `(lambda (<formal-parameters>) <body>)`
 
+**Fun fact:** All functions are lambdas in Scheme!
+
 Two equivalent expressions:
 
 ```
@@ -1303,11 +1308,47 @@ All scheme lists have a linked list structure
 
 **Quotation** is used to refer to symbols directly in Lisp
 
+### Let Expressions
 
+The let special form binds symbols to values temporarily; just for one expression
 
+```
+(define c (let (a 3)
+           b (+ 2 2)))
+          (sqrt (+ (* a a) (* b b)))))
+; a and b are not bound down here
+```
 
-## Lecture 20, 07/27/21: Interpreters
+## Lecture 20, 07/27/21: Interpreters (Important for Proj04)
 
+[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcEOVdCt081pK_Lo0YIXvG6)
+
+### Programming Languages
+
+- **Machine languages:** statements interpreted by hardware itself
+  - extending a machine language involves changing hardware (which is hard)
+  - operations refer to specific hardware memory addresses
+  - no abstraction mechanisms
+- **High-level languages:** statements & expressions are interpreted by another program or compiled (translated) into another language
+  - means of abstraction such as naming, function definition, and objects
+  - in Python, code is compiled into Python 3 Byte Code; `from dis import dis`
+
+### Parsing
+
+A parser takes text and returns an expression through an intermediate called **toxens**. **Lexical analysis** is the process of breaking up text into tokens, which are words of individual symbols; it ignores whitespace. **Syntactic analysis** processes all of these lines together to give us an expression; this is a tree-recursive process that *balances parentheses, returns a tree structure, and processes multiple lines*.
+
+```
+Text -> Lexical Analysis -> Tokens -> Semantic Analysis -> Expression
+               |
+               |
+        (+ 1          --- '(', '+', 1 --- Pair('+', Pair(1, ...))
+           (- 23)     -- '(', '-', 23, ')' --- printed as (+ 1 (-23) (* 4 5.6))
+           (* 4 5.6)) - '(', '*', 4, 5.6, ')', ')'
+```
+
+**Predictive recursive decent parser** inspects only *k* tokens ot decide how to proceed, for some fixed **k**.
+
+...
 
 ## Lecture 21, 07/28/21: Macros (optional)
 
