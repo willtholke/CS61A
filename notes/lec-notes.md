@@ -10,7 +10,7 @@
 ## Table of Contents
 - [CS 61A: Structure & Interpretation of Computer Programs](#cs-61a-structure--interpretation-of-computer-programs)
   - [Table of Contents](#table-of-contents)
-  - [Lecture 1, 06/22/21: Expressions](#lecture-1-062221-expressions)
+  - [Lecture 1, 06/21/21: Expressions](#lecture-1-062121-expressions)
     - [Expressions & Statements](#expressions--statements)
     - [Operand vs. Operator](#operand-vs-operator)
     - [Call Expressions](#call-expressions)
@@ -117,9 +117,16 @@
     - [Parsing](#parsing)
   - [Lecture 21, 07/28/21: Macros (optional)](#lecture-21-072821-macros-optional)
   - [Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme](#lecture-22-072921-exceptions-tail-recursion--more-scheme)
+    - [Functional Programming](#functional-programming)
+    - [Comprehensive Guide to Tail Recursion](#comprehensive-guide-to-tail-recursion)
+  - [Lecture 22, 07/29/21: Regular Expressions (Regex) Basics](#lecture-22-072921-regular-expressions-regex-basics)
+    - [Regular Expressions](#regular-expressions)
+    - [Tools for working with Regex](#tools-for-working-with-regex)
+    - [Social Security Number Regex](#social-security-number-regex)
+    - [Regex in Python](#regex-in-python)
 
 
-## Lecture 1, 06/22/21: Expressions
+## Lecture 1, 06/21/21: Expressions
 
 ### Expressions & Statements
   
@@ -1352,4 +1359,77 @@ Text -> Lexical Analysis -> Tokens -> Semantic Analysis -> Expression
 
 ## Lecture 21, 07/28/21: Macros (optional)
 
+N/A
+
 ## Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme
+
+### Functional Programming
+
+- All functions are pure functions
+- No re-assignment and no mutable data types
+- Name-value bindings are permanent
+  
+### Comprehensive Guide to Tail Recursion
+
+- Functions in python can never be tail recursive
+
+**Tail Calls:**
+
+- A tail call is a call expression in a tail context, such as;
+  - The last body sub-expression in a lambda expression (or procedure definition)
+  - Sub-expressions 2 & 3 in a tail context if expression
+  - All non-predicate sub-expressions in a tail context cond
+  - The last sub-expression in a tail context and, or, begin, or let
+
+More simply, a function is tail recursive **because it can return any computation in the last frame before going up through the previous frames to compute the final answer.**
+
+- A call expression *is not a tail call* if more computation is still required in the calling proccess
+
+**Here's an example of a tail recursive function:**
+
+```
+(define (factorial-tail n k)
+        (if (= n 0)
+          k
+          (factorial-tail (- n 1) (k * n))
+        )
+)
+```
+
+.....
+
+## Lecture 22, 07/29/21: Regular Expressions (Regex) Basics
+
+### Regular Expressions
+
+**Declarative programming:** find something that looks like this" vs. "search for the substring 'hello'"
+
+### Tools for working with Regex
+
+[Regex101.com](https://regex101.com/)
+
+[Regex Open Reference](https://cs61a.org/lab/lab11/#regular-expressions)
+
+[Online Regex tutorial](https://regexone.com/)
+
+### Social Security Number Regex
+
+```
+/[1-9]{3}-[1-9]{2}-[1-9]{4}
+```
+
+### Regex in Python
+
+**Raw String Examples:**
+
+```py
+>>> "\n"
+'\n'
+>>> r"\n"
+'\\n'
+>>> print("I have \na newline in me")
+I have
+a newline in me
+>>> print(r"I have \na newline in me")  # raw string
+I have \na newline in me.
+```
