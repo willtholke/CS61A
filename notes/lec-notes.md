@@ -119,7 +119,7 @@
   - [Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme](#lecture-22-072921-exceptions-tail-recursion--more-scheme)
     - [Functional Programming](#functional-programming)
     - [Comprehensive Guide to Tail Recursion](#comprehensive-guide-to-tail-recursion)
-  - [Lecture 22, 07/29/21: Regular Expressions (Regex) Basics](#lecture-22-072921-regular-expressions-regex-basics)
+  - [Lecture 23, 08/02/21: Regular Expressions (Regex) Basics](#lecture-23-080221-regular-expressions-regex-basics)
     - [Regular Expressions](#regular-expressions)
     - [Tools for working with Regex](#tools-for-working-with-regex)
     - [Social Security Number Regex](#social-security-number-regex)
@@ -1398,7 +1398,7 @@ More simply, a function is tail recursive **because it can return any computatio
 
 .....
 
-## Lecture 22, 07/29/21: Regular Expressions (Regex) Basics
+## Lecture 23, 08/02/21: Regular Expressions (Regex) Basics
 
 ### Regular Expressions
 
