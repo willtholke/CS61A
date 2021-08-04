@@ -142,6 +142,7 @@
     - [Python and SQL](#python-and-sql)
     - [SQL Injection Attack](#sql-injection-attack)
     - [Database Conenctions](#database-conenctions)
+    - [Two SQL Exercises](#two-sql-exercises)
 
 
 ## Lecture 1, 06/21/21: Expressions
@@ -1668,3 +1669,8 @@ You can prevent SQL injection attacks by using a template: `db.execute("INSERT I
 
 Check out [Denero's video](https://www.youtube.com/watch?v=2Ak8LgTS4R4&list=PLx38hZJ5RLZcb6ayl4PYTcc2LO5Dd404L&index=8&ab_channel=JohnDeNero) on the topic.
 
+### Two SQL Exercises
+
+[Exercise 1](https://www.w3resource.com/sql-exercises/sql-retrieve-exercise-16.php)
+
+[Exercise 2](https://www.w3resource.com/sql-exercises/sql-aggregate-function-exercise-12.php)
