@@ -141,6 +141,7 @@
     - [Modifying Tables](#modifying-tables)
     - [Python and SQL](#python-and-sql)
     - [SQL Injection Attack](#sql-injection-attack)
+    - [Database Conenctions](#database-conenctions)
 
 
 ## Lecture 1, 06/21/21: Expressions
@@ -1658,3 +1659,12 @@ db.commit()  # file contains all the contents of the database
 ```
 
 ### SQL Injection Attack
+
+When string concatenation is used to construct a SQL statement, injection attacks are possible. For an example of such an attack, check out [Denero's description](https://www.youtube.com/watch?v=tjlgWZ82kLA&list=PLx38hZJ5RLZcb6ayl4PYTcc2LO5Dd404L&index=7&ab_channel=JohnDeNero).
+
+You can prevent SQL injection attacks by using a template: `db.execute("INSERT INTO Students VALUES (?)", [name])`
+
+### Database Conenctions
+
+Check out [Denero's video](https://www.youtube.com/watch?v=2Ak8LgTS4R4&list=PLx38hZJ5RLZcb6ayl4PYTcc2LO5Dd404L&index=8&ab_channel=JohnDeNero) on the topic.
+
