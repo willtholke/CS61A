@@ -119,11 +119,28 @@
   - [Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme](#lecture-22-072921-exceptions-tail-recursion--more-scheme)
     - [Functional Programming](#functional-programming)
     - [Comprehensive Guide to Tail Recursion](#comprehensive-guide-to-tail-recursion)
+    - [Example: Reverse List](#example-reverse-list)
   - [Lecture 23, 08/02/21: Regular Expressions (Regex) Basics](#lecture-23-080221-regular-expressions-regex-basics)
     - [Regular Expressions](#regular-expressions)
     - [Tools for working with Regex](#tools-for-working-with-regex)
     - [Social Security Number Regex](#social-security-number-regex)
     - [Regex in Python](#regex-in-python)
+  - [Lecture 24, 08/03/21: SQL](#lecture-24-080321-sql)
+    - [Declarative Programming](#declarative-programming)
+    - [Selecting & Creating Tables](#selecting--creating-tables)
+    - [Project Tables with Select](#project-tables-with-select)
+    - [Arithmetic](#arithmetic)
+    - [Joining Tables](#joining-tables)
+    - [Aliases and Dot Expressions](#aliases-and-dot-expressions)
+    - [Numerical Expressions](#numerical-expressions)
+    - [String Expressions](#string-expressions)
+  - [Lecture 25, 08/04/21: More SQL](#lecture-25-080421-more-sql)
+    - [Aggregation & Aggregate Functions](#aggregation--aggregate-functions)
+    - [Groups](#groups)
+    - [Drop Table (reverse of create table)](#drop-table-reverse-of-create-table)
+    - [Modifying Tables](#modifying-tables)
+    - [Python and SQL](#python-and-sql)
+    - [SQL Injection Attack](#sql-injection-attack)
 
 
 ## Lecture 1, 06/21/21: Expressions
@@ -1355,11 +1372,11 @@ Text -> Lexical Analysis -> Tokens -> Semantic Analysis -> Expression
 
 **Predictive recursive decent parser** inspects only *k* tokens ot decide how to proceed, for some fixed **k**.
 
-...
 
 ## Lecture 21, 07/28/21: Macros (optional)
 
-N/A
+[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcSPC7bHlthJPq_R4ZO58F1)
+
 
 ## Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme
 
@@ -1396,7 +1413,23 @@ More simply, a function is tail recursive **because it can return any computatio
 )
 ```
 
-.....
+### Example: Reverse List
+
+```
+(define (reverse lst)
+  (define (reverse-helper lst new-list)
+    (if (null? lst)
+      new-list
+    (reverse-helper (cdr lst) (cons (car lst) new-list))
+    )
+  )
+  (reverse-helper lst ())
+)
+
+(expect (reverse '(1 2 3)) (3 2 1))
+(expect (reverse '(0 9 1 2)) (2 1 9 0))
+```
+
 
 ## Lecture 23, 08/02/21: Regular Expressions (Regex) Basics
 
@@ -1433,3 +1466,195 @@ a newline in me
 >>> print(r"I have \na newline in me")  # raw string
 I have \na newline in me.
 ```
+
+
+## Lecture 24, 08/03/21: SQL
+
+### Declarative Programming
+
+- **SQL** stands for Structured Query Language
+- In **declarative languages**, a "program" is a description of the desired result
+- The interpreter figures out how to generate the result
+- The interpreter does not carry out execution/evaluation rules
+
+### Selecting & Creating Tables
+
+- `select` statements create a new table (most important)
+  - `select [expression] as [name], [expression] as [name];` creates a two column table
+  - In a `select` *expression*, column names evaluate to row values
+  - ALL SQL statements end in a semicolon
+  - The union of two `select` statements is a table containing the rows of both of their results
+- `create table` statements give a global name to a table
+  - `create table [name] as [select statement];`
+
+Example:
+
+```sql
+select "abraham" as parent, "barack" as child union
+select "abraham"          , "clinton"         union
+select "fillmore"         , "grover";
+```
+
+The result of the `select` statements above are displayed to the user, but not stored; in order to give the result a name, use `create table`
+
+```sql
+create table parents as
+select "abraham" as parent, "barack" as child union
+select "abraham"          , "clinton"         union
+select "fillmore"         , "grover";
+```
+
+### Project Tables with Select
+
+- A `select` statement can specify an input table using a `from` clause
+  - `select [expression] as [name], [expression] as [name], ...;`
+- A subset of the rows of the input table can be selected using a `where` clause
+- An ordering over the remaining rows can be ceclared using an `order by` clause
+- Column descriptions determine how each input row is projected to a result row
+  - `select [columns] from [table] where [condition] order by [order];`
+  - `select child from parents where parent = "abraham";` 
+- Get an entire table with `select * from [table];`
+
+### Arithmetic
+
+- `union` does not order results
+  
+```SQL
+create table lift as
+  select 101 as chair, 2 as single, 2 as couple union
+  select 102         , 0          , 3           union
+  select 103         , 4          , 1;
+
+select chair, single + 2 * couple as total from lift;
+```
+
+Another example (out of context):
+
+- `select word from ints where one + two/2 + four/4 + eight/8 = 1;`
+
+### Joining Tables
+
+- Two tables A & B are joined by a comma to yield all combos of a row from A & a row from B
+
+Some examples (out of context):
+
+```SQL
+select parent from parents, dogs
+              where child = name and fur = "curly";
+```
+
+```SQL
+select * from parents, dogs
+         where child=name;
+```
+
+```SQL
+CREATE TABLE old_dogs AS
+  SELECT age, pet FROM students WHERE age = 'oldddd' AND pet = 'dog';
+```
+
+### Aliases and Dot Expressions
+
+Some examples (out of context) that illustrate proper syntax and (my personal) indentation preferences:
+
+```SQL
+CREATE TABLE potential_mates AS  -- create a table with the following attributes
+  SELECT a.favfood, a.favsong, a.favcolor, b.favcolor  -- student 1 favfood, student 2 favsong, student 1 favcolor, student 2 favcolor
+    FROM students AS a, students AS b  -- instantiate aliases
+      WHERE a.favfood = b.favfood AND  -- conditionals
+          a.favsong = b.favsong AND
+          a.time < b.time; -- 
+```
+
+### Numerical Expressions
+
+An example (out of context):
+
+```SQL
+CREATE TABLE cold AS
+  SELECT name FROM cities WHERE latitude >= 43;
+```
+
+### String Expressions
+
+```SQL
+sqlite> select "hello," || " world";
+hello, world
+```
+
+## Lecture 25, 08/04/21: More SQL
+
+### Aggregation & Aggregate Functions
+
+In all of the previous notes on SQL, our SQL expressions have referred to the values in a single row at a time
+
+Some examples (out of context):
+
+`select max(legs) from animals;`
+
+`select max(legs - weight) + 5 from animals;`
+
+`select max(legs), min(weight) from animals;` (computed independently of one another; the result does not pertain to a single animal)
+
+`select min(legs), max(weight) from animals where kind <> "t-rex";`
+
+`select count(*) from animals;` use of the `count` keyword
+
+`select count(distinct legs) from animals;` use of the `distinct` keyword
+
+**A key point:** an aggregate function also selects rows in a table; for instance, in the expression `select max(weight), kind from animals`, kind actually refers to the row in which the condition `max(weight)` is satisfied; if `max(weight)` is 12000 for an animal called `t-rex`, then `legs` would be `2` and `kind` would be `t-rex`, all of which are labels for that row in the table
+
+### Groups
+
+`select [columns] from [table] group by [expression] having [expression];`
+
+`select weight/legs, count(*) from animals group by weight/legs having count(*)>1;`
+
+### Drop Table (reverse of create table)
+
+```SQL
+sqlite> create table primes(n, prime);
+sqlite> drop table if exists primes;
+sqlite> select * from primes;
+Error: no such table: primes
+```
+
+Unrelated Examples:
+
+`CREATE TABLE nmbers (n, note);` column n and note about n
+
+`CREATE TABLE numbers (n UNIQUE, note);` one note per n
+
+`CREATE TABLE numbers (n, note DEFAULT "No comment");` default comment
+
+### Modifying Tables
+
+For a table t with two columns, to insert into one column: `INSERT INTO t(column) VALUES (value);`
+ 
+To insert into both column: `INSERT INTO t VALUES (value0, value1);`
+
+```SQL
+sqlite> create table primes(n UNIQUE, prime DEFAULT 1)
+sqlite> INSERT INTO primes(n) VALUES (4), (5), (6), (7);
+sqlite> select * from primes;
+-- try it out for yourself to see the result!
+sqlite> UPDATE primes SET prime=0 WHERE n>2 where n%2=0;
+sqlite> DELETE FROM primes WHERE prime=0;
+```
+
+### Python and SQL
+
+Each time the table below is run, a file called n.db is constructed
+
+```py
+import sqlite3
+
+db = sqlite3.Connection("m.db")  # the file name associated with database
+db.execute("CREATE TABLE nums SELECT 2 UNION SELECT 3;")  # construct a string that is a SQL statement
+db.execute("INSERT INTO nums VALUES (?), (?), (?)", range(4,7))
+print_val = db.execute("SELECT * FROM nums;").fetchall()  # fetch the contests from existing table as a list of values
+print(print_val)
+db.commit()  # file contains all the contents of the database
+```
+
+### SQL Injection Attack
