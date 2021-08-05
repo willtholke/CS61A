@@ -120,6 +120,7 @@
     - [Functional Programming](#functional-programming)
     - [Comprehensive Guide to Tail Recursion](#comprehensive-guide-to-tail-recursion)
     - [Example: Reverse List](#example-reverse-list)
+- [Example: Count all the 1s](#example-count-all-the-1s)
   - [Lecture 23, 08/02/21: Regular Expressions (Regex) Basics](#lecture-23-080221-regular-expressions-regex-basics)
     - [Regular Expressions](#regular-expressions)
     - [Tools for working with Regex](#tools-for-working-with-regex)
@@ -1345,6 +1346,7 @@ The let special form binds symbols to values temporarily; just for one expressio
 ; a and b are not bound down here
 ```
 
+
 ## Lecture 20, 07/27/21: Interpreters (Important for Proj04)
 
 [Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcEOVdCt081pK_Lo0YIXvG6)
@@ -1382,6 +1384,12 @@ Text -> Lexical Analysis -> Tokens -> Semantic Analysis -> Expression
 
 ## Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme
 
+- **Tail Call:** call expression in a tail context
+- **Tail Context** final action in a procedure/function
+- **Tail Recursive Function:** recursive function where all its recursive calls are tail calls
+
+See [Discussion 11](https://cs61a.org/disc/disc11/) for a more in-depth explanation
+
 ### Functional Programming
 
 - All functions are pure functions
@@ -1417,7 +1425,7 @@ More simply, a function is tail recursive **because it can return any computatio
 
 ### Example: Reverse List
 
-```
+```s
 (define (reverse lst)
   (define (reverse-helper lst new-list)
     (if (null? lst)
@@ -1430,6 +1438,25 @@ More simply, a function is tail recursive **because it can return any computatio
 
 (expect (reverse '(1 2 3)) (3 2 1))
 (expect (reverse '(0 9 1 2)) (2 1 9 0))
+```
+
+# Example: Count all the 1s
+
+```s
+(define (count-tail lst x)
+    ; count all the instances of 1 in a list
+    (define (helper lst ret_val)
+        (cond
+            ((null? lst) ret_val)
+            ((equal? (car lst) x) (helper (cdr lst) (+ ret_val 1)))   
+            (else (helper (cdr lst) ret_val))
+        )
+    )
+    (helper lst 0)
+)
+
+(count-tail '(1 2 1 1 1 1 1) 1) ; outputs 6
+; no test cases
 ```
 
 
