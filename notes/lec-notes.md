@@ -2,7 +2,7 @@
 
     University of California, Berkeley
     Instructors: Albert Xu, Alex Kassil, Catherine Cang
-    albertxu3@berkeley.edu, alexkassil@berkeley.edu,  catherinecang@berkeley.edu
+    albertxu3@berkeley.edu, alexkassil@berkeley.edu, catherinecang@berkeley.edu
     Office Hours: cs61a.org/office-hours/
     Lecture: Mon/Tues/Thurs/Fri 12:30pm-2:00pm
     Author: Will Tholke
@@ -120,7 +120,7 @@
     - [Functional Programming](#functional-programming)
     - [Comprehensive Guide to Tail Recursion](#comprehensive-guide-to-tail-recursion)
     - [Example: Reverse List](#example-reverse-list)
-- [Example: Count all the 1s](#example-count-all-the-1s)
+    - [Example: Count all the 1s](#example-count-all-the-1s)
   - [Lecture 23, 08/02/21: Regular Expressions (Regex) Basics](#lecture-23-080221-regular-expressions-regex-basics)
     - [Regular Expressions](#regular-expressions)
     - [Tools for working with Regex](#tools-for-working-with-regex)
@@ -1440,7 +1440,7 @@ More simply, a function is tail recursive **because it can return any computatio
 (expect (reverse '(0 9 1 2)) (2 1 9 0))
 ```
 
-# Example: Count all the 1s
+### Example: Count all the 1s
 
 ```s
 (define (count-tail lst x)

@@ -2,7 +2,7 @@
 
     University of California, Berkeley
     Instructors: Albert Xu, Alex Kassil, Catherine Cang
-    albertxu3@berkeley.edu, alexkassil@berkeley.edu,  catherinecang@berkeley.edu
+    albertxu3@berkeley.edu, alexkassil@berkeley.edu, catherinecang@berkeley.edu
     Office Hours: cs61a.org/office-hours/
     Lecture: Mon/Tues/Thurs/Fri 12:30pm-2:00pm
     Author: Will Tholke
