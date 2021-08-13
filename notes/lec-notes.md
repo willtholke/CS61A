@@ -14,6 +14,10 @@
     - [Expressions & Statements](#expressions--statements)
     - [Operand vs. Operator](#operand-vs-operator)
     - [Call Expressions](#call-expressions)
+    - [Modulo and Floor](#modulo-and-floor)
+    - [Control Statements](#control-statements)
+    - [Short Circuiting](#short-circuiting)
+    - [Return Values](#return-values)
   - [Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data](#lecture-2-062221-functions-values-objects-interpreters--data)
     - [Types of Expressions](#types-of-expressions)
     - [Assignment Statements](#assignment-statements)
@@ -69,7 +73,6 @@
     - [Dictionaries](#dictionaries)
     - [Data Abstraction & Barriers](#data-abstraction--barriers)
     - [List slicing](#list-slicing)
-    - [Min/Max (with Key)](#minmax-with-key)
   - [Lecture 10, 07/07/21: Trees](#lecture-10-070721-trees)
     - [Trees](#trees)
     - [Tree Processing](#tree-processing)
@@ -90,18 +93,21 @@
     - [Iterators](#iterators)
     - [Filtration](#filtration)
     - [Generators](#generators)
+    - [Q7: Pairs (generator) [Source]](#q7-pairs-generator-source)
   - [Lecture 14, 07/14/21: Midterm Review](#lecture-14-071421-midterm-review)
     - [Reminder: Midterm is tomorrow!](#reminder-midterm-is-tomorrow)
   - [Lecture 15, 07/19/21: Objects + Classes](#lecture-15-071921-objects--classes)
     - [Constructors](#constructors)
   - [Lecture 16, 07/20/21: Inheritance + Representation](#lecture-16-072021-inheritance--representation)
+    - [Q6: Keyboard [Source]](#q6-keyboard-source)
   - [Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees](#lecture-17-072121-representation-linked-lists-and-mutable-trees)
     - [String Representations](#string-representations)
     - [Linked List](#linked-list)
     - [Linked List Class](#linked-list-class)
+    - [Q5: Remove Duplicates [Source]](#q5-remove-duplicates-source)
     - [Tree Class](#tree-class)
   - [Lecture 18, 07/22/21: Exceptions & Special Object Methods](#lecture-18-072221-exceptions--special-object-methods)
-    - [__repr__ methods](#repr-methods)
+    - [\_\_repr\_\_ methods](#__repr__-methods)
     - [Interfaces](#interfaces)
     - [Names with Special Behavior](#names-with-special-behavior)
     - [Exceptions](#exceptions)
@@ -144,6 +150,7 @@
     - [SQL Injection Attack](#sql-injection-attack)
     - [Database Conenctions](#database-conenctions)
     - [Two SQL Exercises](#two-sql-exercises)
+  - [*~Finito!~*](#finito)
 
 
 ## Lecture 1, 06/21/21: Expressions
@@ -152,10 +159,10 @@
   
 An expression is a peice of code that describes computation and evaluates to some value while a *statement* is one or more lines of code that make something happen in a program; ex: expression is `1 + 2`, value is `3`
 
-- Expressions are evaluated
-- Statements are executed
+- Expressions -> evaluated
+- Statements -> executed
 
-- all expressions can be written in **f(x)** form; all values are expressions, but not all expressions are values; an expression can also be a function
+- all expressions can be written in `f(x)` form; all values are expressions, but not all expressions are values; an expression can also be a function
 
 ### Operand vs. Operator
 An **operand** are the values that an operator acts on whereas **operators** are special symbols that indicate that a computation should be performed
@@ -178,21 +185,78 @@ The syntax of a function call:
 operator  operand  operand
 ```
 
-Evaluation Procedure for Call Expressions:
+**Evaluation Procedure for Call Expressions:**
 
 1) Evaluate the operator
 2) Evluate the operands from left to right
 3) Apply the operator (a function) to the evaluated operands (arguments)
 
+### Modulo and Floor
+
+- If you floor divide a number by 10, it removes the right digit: `123 // 10 = 10`
+- If you mod 10 a number, you get the right digit: `123 % 10 = 3`
+
+### Control Statements
+
+Control statements control the flow of a program's execution based on the results of logical comparisons; statements have no value
+
+Python's three boolean operators, `and`, `or`, and `not`, have an order of operation:
+- `not` has the highest priority
+- `and`
+- `or` has the lowest priority
+
+Python's boolean operators work on more than booleans (`True`, `False`): `0`, `None`, `''`, and `[]` are all considered false values; all other values are considered true.
+
+### Short Circuiting
+
+Short-circuiting occurs when the operator arrives an an operand that allows the operator to make a conclusion about the expression. If `and` or `or` do not short-circuit, they return the last thing they evaluate.
+
+Cases:
+1) `<left>` **and** `<right>` (remember as "False and")
+   - Evaluate `<left>`
+   - If result is false value `v`, expression evaluates to `v`
+   - Otherwise, expression evalutes to the value of `<right>`
+     - `<left>` and `<right>` are subexpressions
+
+2) `<left>` **or** `<right>` (remember as "True or")
+   - Evaluate `<left>`
+   - If result is true value `v`, expression evaluates to `v`
+   - Otherwise, expression evalutes to the value of `<right>`
+     - `<left>` and `<right>` are subexpressions
+3) Not `<exp>` (remember as "opposite")
+   - Evaluate `<exp>`
+     - The value is `True` if the result evaluates to `False`
+     - The value is `False` if the result evaluates to `True`
+
+```py
+>>> True and 1 / 5
+0.2
+>>> True and 1 / 0
+ZeroDivisionError: division by zero
+>>> False and 1 / 5
+False
+>>> False and 1 / 0
+False
+>>> True or 1 / 0
+True
+>>> True or 1/5
+True
+```
+
+### Return Values
+
+When a function or expression doesn't return anything, it implicitly returns none:
+- `print(print(2))` evaluates `print(2)`, which prints `2` and returns `None`, and then evaluates `print(None)` and prints `None` 
+
 ## Lecture 2, 06/22/21: Functions, Values, Objects, Interpreters, & Data
 
 ### Types of Expressions
 
-- Primitive expressions
+- **Primitive expressions**
   - Only take one step to evaluate
   - Include numbers and booleans, which evalutate to themselves
 
-- Arithmetic expressions
+- **Arithmetic expressions**
   - Numbers can be combined with mathematical operators to form compound expressions
   - Operators: `+`, `-`, `*`, `**`, etc.
   - Floating point division `/`: divides the first number by the second and evaluates it to a *float*, a number with a decimal point
@@ -211,7 +275,6 @@ Evaluation Procedure for Call Expressions:
 ### Assignment Statements
 - `a = (100 + 50) // 2 `
   - Consists of a name (`a`) and an expression (`(100 + 50) // 2`)
-  
 
 ### Values
 
@@ -280,14 +343,14 @@ A function that does not explicitly return a value will return `None`
 
 An environment is a sequence of frames, which could include the *global frame alone* or *a local, then the global frame*. The global frame is the **last frame** of every environment.
 
-Function creation and execution:
+**Function creation and execution:**
 
 1) Function is created
 2) Name is bound to that function in the current frame
 3) Operator & operands evalauted
 4) Function called on arguments
 
-Creation of frames:
+**Creation of frames:**
 
 1) Start in the global frame
 2) Opening frames starts with `f1` for "frame 1"
@@ -349,8 +412,8 @@ def square(x):  # domain - x is a real number
 ### Higher Order Functions
 
 A higher order function is a function that takes in another function as an argument **and/or** returns another function
-- they allow us to design functions by expressing general patterns of computation, remove repetition from programs, and separate concerns among functions (each function has one job)
 
+- they allow us to design functions by expressing general patterns of computation, remove repetition from programs, and separate concerns among functions (each function has one job)
 
 ### A Function That Returns a Function
 
@@ -456,7 +519,6 @@ When you apply a user-defined function, you create a new frame and bind the form
    - Copy down the formal parameter names
 3. Bind the arguments to their formal parameters
 
-
 ### Currying
 
 **Currying:** the act of transforming a multi-argument function into a single-argument, higher-order function
@@ -526,7 +588,7 @@ def sum_digits(n):
 
 ### The Recursive Leap of Faith
 
-Factorial:
+**Example:** a factorial function
 
 ```py
 def fact(n):
@@ -544,7 +606,7 @@ def fact(n):
 
 **Functional abstraction** - giving a name to some computational process, then referring to that process without worrying about the details of its implementation
 
-Naming Conventions for Values:
+**Naming Conventions for Values:**
 
 - `n, k, i` - usually integers
 - `x, y, z` - usually real numbers
@@ -587,11 +649,10 @@ def fib(n):
 
 ### Towers of Hanoi
 
-The Towers of Hanoi problems shows us two things:
+**The Towers of Hanoi problems shows us two things:**
 
 1) the power and beautify of recursion
 2) exponential growth
-
 
 ```py
 def move_disk(disk_number, from_peg, to_peg):
@@ -707,9 +768,9 @@ for <name> in <expression>:
 
 A range is a sequence of consecutive integers
 
-Length: ending value - starting value
+**Length:** ending value - starting value
 
-Element selection: starting value + index
+**Element selection:** starting value + index
 
 ### List Comprehensions
 
@@ -734,7 +795,6 @@ Dictionaries have two restrictions:
 - a key of a dict cannot be a list or a dict (or any mutable type)
 - two keys cannot be identical & there can only be one value for a given key
 
-
 ```py
 >>> my_dict = {'name': 'will', 'age': 20}
 >>> my_dict['name']
@@ -750,7 +810,7 @@ Dictionaries have two restrictions:
 
 **Data Abstraction:** a methodology by which functions enforce an abstraction barrier between *representation* and *use*; an abstract data type lets us manipulate compound objects as units
 
-Example: rational numbers
+**Example:** rational numbers
 
 ```md
 3 / 2 * 3 / 5 = 9 / 10
@@ -766,6 +826,26 @@ nx / dx * ny / dy = (nx * ny) / (dx * dy)
 
 `lst[:]` creates a copy of `lst`
 `lst[::-1]` creates `lst` but reversed
+
+Slice sequences in half:
+
+```py
+>>> seq = [1, 2, 3, 4, 5]
+>>> mid1 = len(seq) // 2
+>>> first_half = seq[:mid1]
+>>> second_half = seq[mid1:]
+>>> first_half + second_half
+[1, 2, 3, 4, 5]
+```
+
+`lst[start::step]` syntax:
+
+```py
+>>> lst = [0, 1, 2, 3, 4]
+>>> start = 1
+>>> step = 2
+>>> lst[start::step]
+[1, 3]
 
 ### Min/Max (with Key)
 
@@ -816,7 +896,7 @@ def print_tree(t, indent=0):
 
 ### Sum labels
 
-[Associated Lecture Playlist](https://www.youtube.com/watch?v=zSEvi3sF3Z0&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=8&ab_channel=JohnDeNero)
+[Prerecorded Lecture Playlist](https://www.youtube.com/watch?v=zSEvi3sF3Z0&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=8&ab_channel=JohnDeNero)
 
 ### Constructor and Selectors: Rational Data Abstraction Implemented as Functions
 
@@ -843,7 +923,7 @@ def denom(x):
 
 ### Box-and-Pointer in Environment Diagrams
 
-[Associated Lecture Playlist](https://www.youtube.com/watch?v=aSqOiUZg7kQ&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=2&ab_channel=JohnDeNero)
+[Prerecorded Lecture Playlist](https://www.youtube.com/watch?v=aSqOiUZg7kQ&list=PLx38hZJ5RLZez9DPP9ZPJdeOiNXlTtNUA&index=2&ab_channel=JohnDeNero)
 
 ### Slicing
 
@@ -913,7 +993,7 @@ True
 
 Conversely, ...
 
-```
+```py
 >>> a = [10]
 >>> b = [10]
 >>> a == b
@@ -1027,7 +1107,7 @@ def memo(f):
 
 ## Lecture 13, 07/13/21: Iterators + Generators
 
-[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZc3rfKSpNPHj-NLCAONJBgW)
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZc3rfKSpNPHj-NLCAONJBgW)
 
 ### Iterators
 
@@ -1064,6 +1144,32 @@ Iterablue value -> passed to iter to produce an iterator -> returned from iter a
 
 **yield from:** yields all values from an iterator or iterable
 
+### Q7: Pairs (generator) [[Source](https://cs61a.org/lab/lab13/)]
+
+Write a generator function `pairs` that takes a list and yields all the possible pairs of elements from that list.
+
+```py
+def pairs(lst):
+    """
+    >>> type(pairs([3, 4, 5]))
+    <class 'generator'>
+    >>> for x, y in pairs([3, 4, 5]):
+    ...     print(x, y)
+    ...
+    3 3
+    3 4
+    3 5
+    4 3
+    4 4
+    4 5
+    5 3
+    5 4
+    5 5
+    """
+    for i in lst:
+        for x in lst:
+            yield i, x
+```
 
 ## Lecture 14, 07/14/21: Midterm Review
 
@@ -1071,10 +1177,9 @@ Iterablue value -> passed to iter to produce an iterator -> returned from iter a
 
 [CS 61A Summer 2021 Lecture 14: Midterm Review (Recorded)](https://www.youtube.com/watch?v=XuJHIeEa9Bo&ab_channel=CS61ADepartmental)
 
-
 ## Lecture 15, 07/19/21: Objects + Classes
 
-[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZdpTgPV5maow50L2sWNuZ-o)
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZdpTgPV5maow50L2sWNuZ-o)
 
 ### Constructors
 
@@ -1082,11 +1187,73 @@ Iterablue value -> passed to iter to produce an iterator -> returned from iter a
 
 Class attributes are "shared" across all instances of a class because they are attributes of the class, not any instance of that class
 
-
 ## Lecture 16, 07/20/21: Inheritance + Representation
 
-No notes available
+### Q6: Keyboard [[Source](https://cs61a.org/lab/lab13/)]
 
+Create a `Keyboard` class that takes in an arbitrary number of `Button`s and stores those `Button`s in a dictionary. They keys will be ints that represent the position on the `Keyboard`, and the values will be the respective `Button`. Fill out the methods in the `Keyboard` class according to each description, using the doctests as a reference for the behavior of a `Keyboard`.
+
+```py
+class Button:
+    """
+    Represents a single button
+    """
+
+    def __init__(self, pos, key):
+        """
+        Creates a button
+        """
+        self.pos = pos
+        self.key = key
+        self.times_pressed = 0
+
+
+class Keyboard:
+    """A Keyboard takes in an arbitrary amount of buttons, and has a
+    dictionary of positions as keys, and values as Buttons.
+
+    >>> b1 = Button(0, "H")
+    >>> b2 = Button(1, "I")
+    >>> k = Keyboard(b1, b2)
+    >>> k.buttons[0].key
+    'H'
+    >>> k.press(1)
+    'I'
+    >>> k.press(2) #No button at this position
+    ''
+    >>> k.typing([0, 1])
+    'HI'
+    >>> k.typing([1, 0])
+    'IH'
+    >>> b1.times_pressed
+    2
+    >>> b2.times_pressed
+    3
+    """
+
+    def __init__(self, *args):
+        self.buttons = {}
+        for i in args:
+            self.buttons[i.pos] = i
+    
+
+    def press(self, info):
+        """Takes in a position of the button pressed, and
+        returns that button's output"""
+        if info in self.buttons:
+            self.buttons[info].times_pressed += 1
+            return self.buttons[info].key
+        return ''
+
+    def typing(self, typing_input):
+        """Takes in a list of positions of buttons pressed, and
+        returns the total output"""
+        ret_val = ''
+        for i in typing_input:
+            self.buttons[i].times_pressed += 1
+            ret_val += self.buttons[i].key
+        return ret_val
+```
 
 ## Lecture 17, 07/21/21: Representation, Linked Lists, and Mutable Trees
 
@@ -1137,7 +1304,7 @@ In Python, all objects produce two string representations:
 
 - Either empty or first value and the rest of the linked list
 
-```
+```python
 Link(3, Link(4, Link(5, Link.empty)))
 
 [3, 4, 5]
@@ -1183,6 +1350,23 @@ else:
   ...
 ```
 
+### Q5: Remove Duplicates [[Source](https://inst.eecs.berkeley.edu/~cs61a/sp21/disc/disc14/assets/61a-sp21-disc14_sol.pdf)]
+
+```py
+def remove_duplicates(lnk):
+    """
+    >>> lnk = Link(1, Link(1, Link(1, Link(1, Link(5)))))
+    >>> remove_duplicates(lnk)
+    >>> lnk
+    Link(1, Link(5))
+    """
+    if lnk == Link.empty or lnk.rest == Link.empty:
+        return
+    if lnk.first == lnk.rest.first:
+        lnk.rest = lnk.rest.rest
+        remove_duplicates(lnk)
+```
+
 ### Tree Class
 
 ```py
@@ -1194,10 +1378,9 @@ class Tree:
     self.branches = list(branches)
 ```
 
-
 ## Lecture 18, 07/22/21: Exceptions & Special Object Methods
 
-### __repr__ methods
+### \_\_repr\_\_ methods
 
 ```py
 class Bear:
@@ -1238,7 +1421,7 @@ Check out the [intense guide to magic methods](https://rszalski.github.io/magicm
 
 ## Lecture 19, 07/26/21: Scheme
 
-[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZf-3ZQQ1eo_BRQlUbHZy4HD)
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZf-3ZQQ1eo_BRQlUbHZy4HD)
 
 ### Fundamentals
 
@@ -1281,13 +1464,13 @@ Same order of evaluation as python
   - **and/or:** `(and <e1> ... <en>), (or <e2> ... <en>)`
   - **Binding symbols:** `(define <symbol> <expression> )`
 
-```
+```scheme
 > (define pi 3.14)  # symbol pi is bound to 3.14 in the global frame
 > (* pi 2)  # 2 is multiplied by pi
 6.28
 ```
 
-```
+```scheme
 > (define (abs x)
     (if (< x 0)
         (- x)
@@ -1304,7 +1487,7 @@ Same order of evaluation as python
 
 Two equivalent expressions:
 
-```
+```scheme
 (define (plus4 x) (+ x 4))
 (define plus4 (lambda (x) (x + 4)))
 ```
@@ -1318,7 +1501,7 @@ All scheme lists have a linked list structure
 - **cdr:** return the rest of a list `(value)`
 - **mil:** the empty list `()`
 
-```
+```scheme
 > (define s (cons 1 (cons 2 nil)))
 (1 2)
 > (car x)
@@ -1339,17 +1522,16 @@ All scheme lists have a linked list structure
 
 The let special form binds symbols to values temporarily; just for one expression
 
-```
+```scheme
 (define c (let (a 3)
            b (+ 2 2)))
           (sqrt (+ (* a a) (* b b)))))
 ; a and b are not bound down here
 ```
 
-
 ## Lecture 20, 07/27/21: Interpreters (Important for Proj04)
 
-[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcEOVdCt081pK_Lo0YIXvG6)
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcEOVdCt081pK_Lo0YIXvG6)
 
 ### Programming Languages
 
@@ -1376,11 +1558,9 @@ Text -> Lexical Analysis -> Tokens -> Semantic Analysis -> Expression
 
 **Predictive recursive decent parser** inspects only *k* tokens ot decide how to proceed, for some fixed **k**.
 
-
 ## Lecture 21, 07/28/21: Macros (optional)
 
-[Associated Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcSPC7bHlthJPq_R4ZO58F1)
-
+[Prerecorded Lecture Playlist](https://www.youtube.com/playlist?list=PLx38hZJ5RLZcSPC7bHlthJPq_R4ZO58F1)
 
 ## Lecture 22, 07/29/21: Exceptions Tail Recursion + More Scheme
 
@@ -1414,7 +1594,7 @@ More simply, a function is tail recursive **because it can return any computatio
 
 **Here's an example of a tail recursive function:**
 
-```
+```scheme
 (define (factorial-tail n k)
         (if (= n 0)
           k
@@ -1425,7 +1605,7 @@ More simply, a function is tail recursive **because it can return any computatio
 
 ### Example: Reverse List
 
-```s
+```scheme
 (define (reverse lst)
   (define (reverse-helper lst new-list)
     (if (null? lst)
@@ -1442,7 +1622,7 @@ More simply, a function is tail recursive **because it can return any computatio
 
 ### Example: Count all the 1s
 
-```s
+```scheme
 (define (count-tail lst x)
     ; count all the instances of 1 in a list
     (define (helper lst ret_val)
@@ -1458,7 +1638,6 @@ More simply, a function is tail recursive **because it can return any computatio
 (count-tail '(1 2 1 1 1 1 1) 1) ; outputs 6
 ; no test cases
 ```
-
 
 ## Lecture 23, 08/02/21: Regular Expressions (Regex) Basics
 
@@ -1496,7 +1675,6 @@ a newline in me
 I have \na newline in me.
 ```
 
-
 ## Lecture 24, 08/03/21: SQL
 
 ### Declarative Programming
@@ -1516,7 +1694,7 @@ I have \na newline in me.
 - `create table` statements give a global name to a table
   - `create table [name] as [select statement];`
 
-Example:
+**Example:** simple select statements
 
 ```sql
 select "abraham" as parent, "barack" as child union
@@ -1557,7 +1735,7 @@ create table lift as
 select chair, single + 2 * couple as total from lift;
 ```
 
-Another example (out of context):
+**Another example (out of context):**
 
 - `select word from ints where one + two/2 + four/4 + eight/8 = 1;`
 
@@ -1565,7 +1743,7 @@ Another example (out of context):
 
 - Two tables A & B are joined by a comma to yield all combos of a row from A & a row from B
 
-Some examples (out of context):
+**Some examples (out of context):**
 
 ```SQL
 select parent from parents, dogs
@@ -1584,7 +1762,7 @@ CREATE TABLE old_dogs AS
 
 ### Aliases and Dot Expressions
 
-Some examples (out of context) that illustrate proper syntax and (my personal) indentation preferences:
+**Some examples (out of context) that illustrate proper syntax and (my personal) indentation preferences:**
 
 ```SQL
 CREATE TABLE potential_mates AS  -- create a table with the following attributes
@@ -1597,7 +1775,7 @@ CREATE TABLE potential_mates AS  -- create a table with the following attributes
 
 ### Numerical Expressions
 
-An example (out of context):
+**An example (out of context):**
 
 ```SQL
 CREATE TABLE cold AS
@@ -1648,7 +1826,7 @@ sqlite> select * from primes;
 Error: no such table: primes
 ```
 
-Unrelated Examples:
+**Unrelated Examples:**
 
 `CREATE TABLE nmbers (n, note);` column n and note about n
 
@@ -1701,3 +1879,6 @@ Check out [Denero's video](https://www.youtube.com/watch?v=2Ak8LgTS4R4&list=PLx3
 [Exercise 1](https://www.w3resource.com/sql-exercises/sql-retrieve-exercise-16.php)
 
 [Exercise 2](https://www.w3resource.com/sql-exercises/sql-aggregate-function-exercise-12.php)
+
+## *~Finito!~* 
+

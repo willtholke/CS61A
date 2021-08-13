@@ -2,14 +2,14 @@
 
     University of California, Berkeley
     Instructors: Albert Xu, Alex Kassil, Catherine Cang
-    Emails: albertxu3@berkeley.edu, alexkassil@berkeley.edu, catherinecang@berkeley.edu
+    albertxu3@berkeley.edu, alexkassil@berkeley.edu, catherinecang@berkeley.edu
     Office Hours: cs61a.org/office-hours/
     Lecture: Mon/Tues/Thurs/Fri 12:30pm-2:00pm
     Author: Will Tholke
 
 ## Resources
 
-*All resources can be found at cs61a.org*
+*All resources can be found at [cs61a.org](https://cs61a.org/resources/)*
 
 ### General
 
@@ -64,7 +64,7 @@
 Not curved; grade is based on how many points you earn over the course of the semester; graded on 300 point scale;
 
 - 5: diagnostic quiz
-- 8: extra credit
+- 8-11: extra credit
 - 11 (13 in total): vitamins (google forms, reflect the topics covered in lectures preceding discussion, due T 8am & Th 8am, graded on completion)
 - 11: participation
 - 18: lab (use autograder before submitting to see your score)
