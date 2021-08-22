@@ -1,5 +1,5 @@
 <!--Project Header -->
-<h1 align="center">CS61A:  Structure and Interpretation of Computer Programs</h1>
+<h1 align="center">CS 61A: Structure and Interpretation of Computer Programs</h1>
 <h3 align="center">Notes for UC Berkeley's Summer 2021 section of CS 61A</h3>
 
 <!-- Overview -->
